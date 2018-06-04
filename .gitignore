@@ -208,7 +208,7 @@ TSWLatexianTemp*
 .texpadtmp
 
 # Kile
-*.backup
+#*.backup
 
 # KBibTeX
 *~[0-9]*
