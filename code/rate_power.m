@@ -15,7 +15,7 @@ N_all = pi*R_all.^2.*lambda_all;%Expectation of user number
 
 %% Theoretic
 L = 50; % Number of points used in Gaussian-Laguerre quadrature
-[x_i, w_i] = pyGaussLaguerre(L); % points and weights in Gaussian-Laguerre quadrature
+[x_i, w_i] = pyGaussLaguerre(L); % points and weights in Gaussian-Laguerre                                                                                                                                                                                                                                                                                                                                                                                   quadrature
 a=2*gammainc(x_i*(R_all.^alpha)',2/alpha).*gamma(2/alpha);
 b=alpha*x_i.^(2/alpha)*(R_all.^2)'*noise_power;
 %b=alpha*x_i.^(2/alpha)*(R_all.^2)';
