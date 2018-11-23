@@ -109,7 +109,7 @@ p_sum_result1 = squeeze(sum(p_result1,2));
 p_sum_result2 = squeeze(sum(p_result2,2));
 p_sum_result3 = squeeze(sum(p_result3,2));
 
-f=@mean;
+f=@geo_mean;
 p_sum_result_mean = squeeze(f(p_sum_result,2));
 p_sum_result_mean1 = squeeze(f(p_sum_result1,2));
 p_sum_result_mean2 = squeeze(f(p_sum_result2,2));

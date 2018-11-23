@@ -3,21 +3,23 @@ clearvars
 close all
 clc
 tic
-MAX_IMPLEMENT = 1e2;
+MAX_IMPLEMENT = 1e4;
 K_all = 4:14;
 K = 6; %BS number
 Wmax_all = 1e8*(0.1:0.1:1);
 Wmax = 1e8; %Total bandwidth 100MHz
 Rmin_all = 1e6*(0.1:0.1:1);
 Rmin = 1e6; %10M bps
-radius = 1000;
+radius = 100;
 Gamma = db2pow(-174+9.8+8-10+15.3-30);
 % l1 = rand(K,1)*0.5+0.5;
-l1 = 0.5+0.1*(1:K);
+l1 = 1-K/2*0.1+0.1*(1:K);
+% l1 = ones(1,K);
 % l2 = rand(K,1)*0.5+0.5;
-l2 = 1.1-0.1*(1:K);
+l2 = 1+K/2*0.1-0.1*(1:K);
+% l2 = ones(1,K);
 R_all = radius.*l1;
-lambda_all = 1e3./(1e6).*l2;
+lambda_all = 2e3./(1e6).*l2;
 noise_power = db2pow(0);%thermal noise power density -174dBm/Hz
 noise_power = noise_power*Gamma;
 alpha = 3.76;%Path loss
@@ -118,16 +120,18 @@ p_sum_result1 = squeeze(sum(p_result1,2));
 p_sum_result2 = squeeze(sum(p_result2,2));
 p_sum_result3 = squeeze(sum(p_result3,2));
 
-f=@median;
+f=@geo_mean;
 p_sum_result_mean = squeeze(f(p_sum_result,2));
 p_sum_result_mean1 = squeeze(f(p_sum_result1,2));
 p_sum_result_mean2 = squeeze(f(p_sum_result2,2));
 p_sum_result_mean3 = squeeze(f(p_sum_result3,2));
 %%
 figure;
-plot(pow2db(p_sum_result_mean),'-')
+plot(Rmin_all/1e6,30+pow2db(p_sum_result_mean),'-')
 hold on
-plot(pow2db(p_sum_result_mean1),'-*')
-plot(pow2db(p_sum_result_mean2),'-+')
-plot(pow2db(p_sum_result_mean3),'-x')
+plot(Rmin_all/1e6,30+pow2db(p_sum_result_mean1),'-s')
+plot(Rmin_all/1e6,30+pow2db(p_sum_result_mean2),'-v')
+plot(Rmin_all/1e6,30+pow2db(p_sum_result_mean3),'-o')
+xlabel('R(Mbps)')
+ylabel('P_{sum}(dBm)')
 legend('Proposed','DRA','Reservation', 'Benchmark');

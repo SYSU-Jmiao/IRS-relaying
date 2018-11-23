@@ -1,10 +1,10 @@
 function varargout = ADMM_MNVO_Allocation(x0,R_all,N_all,alpha, noise_power, Rmin, Wmax)
 %% initialization
 K=0.5*length(x0);
-MAX_ITER = +inf;
+MAX_ITER = 2e3;
 ABSTOL   = 1e-5;
-RELTOL   = 1e-5;
-rho = 1e-4;
+RELTOL   = 1e-3;
+rho = 1;
 tau = 2;
 t = 10;
 W = x0(1:K);
