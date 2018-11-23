@@ -1,8 +1,7 @@
 %% MNVO resource allocation with initial point x0
 function [W,P] = MNVO_Allocation(x0,R_all,N_all,alpha, noise_power, Rmin, Wmax)
 K = 0.5*length(x0);
-options = optimoptions('fmincon','Algorithm','interior-point','display','off','ConstraintTolerance',1e-9);
-% x0 = zeros(2*K,1);
+options = optimoptions('fmincon','Algorithm','interior-point','display','off','ConstraintTolerance',1e-10);
 WP=fmincon(@(x) sum(x(K+1:2*K)),x0,[],[],...
     [ones(1,K),zeros(1,K)],1,zeros(2*K,1),[],...
     @(WP) cellConstraint(WP,R_all,N_all,alpha, noise_power, Rmin, Wmax),options);
