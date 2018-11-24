@@ -53,7 +53,8 @@ for rate_i = 1:length(Rmin_all)
 %     Rmin = Rmin_all(rate_i);
     Wmax = Wmax_all(rate_i);
 %     alpha = alpha_all(rate_i);
-    W0 = W;
+%     W0 = W;
+    W0 = 1/K*ones(K,1);
     N0 = W0*Wmax*noise_power;
     P0 = zeros(K,1);
     
