@@ -1,0 +1,11 @@
+Simulation Parameters
+Cell number 6
+Cell radii 100*[0.8, 0.8, 1.0, 1.0, 1.2, 1.2] m
+User densities 2000*[1.2,0.8, 0.8, 1.0, 1.0, 1.2] /(km^2)
+Total bandwidth 100MHz
+Minimum Rate requirement 1Mbps
+Log-normal Shadowing 8dB
+Noise power spectral density -174 dBm/Hz
+Pathloss decay factor 3.76
+Pathloss at reference distance 1m 15.3dB
+Antenna gain 10dBi
