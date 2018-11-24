@@ -1,4 +1,4 @@
-%% user resource allocation3£¨closed form£©
+%% user resource allocation3 closed form 
 function [w, p] = userAllocation3(wmax,h,Wmax, noise_power, Rmin)
 R = Rmin/Wmax;
 N0 = Wmax *noise_power;
@@ -10,7 +10,7 @@ if n == 0
 end
 e = exp(1);
 cf_P = @(W) N0*(2.^(R./(W))-1).*W./h;
-cf_W = @(x) log(2)*R*ones(n,1)./(ones(n,1)+pyLambertW(x/(e*N0)*h-1/e*ones(n,1)));
+cf_W = @(x) log(2)*R*ones(n,1)./(ones(n,1)+flambertw(x/(e*N0)*h-1/e*ones(n,1)));
 f = @(x) sum((cf_W(x)))-wmax;
 hmin = min(h);
 hmax=max(h);

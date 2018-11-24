@@ -1,12 +1,12 @@
 function varargout = ADMM_MNVO_Allocation(x0,R_all,N_all,alpha, noise_power, Rmin, Wmax)
 %% initialization
 K=0.5*length(x0);
-MAX_ITER = 2e3;
+MAX_ITER = 2e2;
 ABSTOL   = 1e-5;
 RELTOL   = 1e-3;
 rho = 1;
 tau = 2;
-t = 10;
+t = 1000;
 W = x0(1:K);
 W_new = zeros(K,1);
 P = x0(K+1:end);
@@ -14,6 +14,7 @@ P_new = zeros(K,1);
 Z = zeros(K,1);
 options = optimoptions('fmincon','Algorithm','interior-point','display','off');
 miu = zeros(K,1);
+history.W(:,1) = W;
 %% iteration
 for k = 1:MAX_ITER
     parfor i = 1: K
@@ -54,6 +55,7 @@ for k = 1:MAX_ITER
     history.s(k) = s;
     history.eps_pri(k)  = tol_pri;
     history.eps_dual(k) = tol_dual;
+    history.W(:,k+1) = Z_new;
     if r <= tol_pri && s <= tol_dual
         break;
     end

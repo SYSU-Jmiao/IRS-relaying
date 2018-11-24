@@ -1,9 +1,8 @@
 %% initialize parameters
-clearvars
 close all
 clc
 tic
-MAX_IMPLEMENT = 1e1;
+MAX_IMPLEMENT = 100;
 K_all = 4:14;
 K = 6; %BS number
 Wmax_all = 1e8*(0.1:0.1:1);
@@ -13,11 +12,11 @@ Rmin = 1e6; %10M bps
 radius = 100;
 Gamma = db2pow(-174+9.8+8-10+15.3-30);
 % l1 = rand(K,1)*0.5+0.5;
-l1 = 0.5+0.1*(1:K);
+l1 = 0.6+0.1*(1:K);
 % l2 = rand(K,1)*0.5+0.5;
-l2 = 1.1-0.1*(1:K);
+l2 = 1.4-0.1*(1:K);
 R_all = radius.*l1;
-lambda_all = 1e3./(1e6).*l2;
+lambda_all = 2e2./(1e6).*l2;
 noise_power = db2pow(0);%thermal noise power density -174dBm/Hz
 noise_power = noise_power*Gamma;
 alpha = 3.76;%Path loss
@@ -35,7 +34,11 @@ p3=cell(length(Rmin_all),K,MAX_IMPLEMENT);
 N = zeros(length(Rmin_all),K,MAX_IMPLEMENT);
 N_all = pi*R_all.^2.*lambda_all;%Expectation  of user number
 %% Stage 1
+tic
 for rate_i = 1:length(Rmin_all)
+    toc
+    fprintf("r = %d\n", rate_i);
+    tic
     Rmin = Rmin_all(rate_i);
     W0 = 1/K;
     N0 = W0*Wmax*noise_power;
