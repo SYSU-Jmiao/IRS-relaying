@@ -1,0 +1,279 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{cmap}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{subfigure}
+\usepackage[final]{graphicx}
+\usepackage{graphics,picture}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{mathrsfs}
+\usepackage{cases}
+\usepackage{bm, comment,color,amssymb}
+\usepackage{cite,epstopdf}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\newcommand{\trace}{\mathop{\mathrm{Tr}}}%\trace
+\newcommand{\vectorize}{\mathop{\mathrm{vec}}}%\vectorization
+
+\begin{document}
+	
+\title{Joint Position and Time Allocation Optimization of UAV Enabled Wireless Powered Communication Networks}
+	
+\author{Miao Jiang, Yiqing Li, Qi Zhang, \emph{Member}, \emph{IEEE}, and Jiayin Qin
+
+\thanks{This work was supported in part by the National Natural Science Foundation of China under Grant 61672549 and Grant 61472458, and in part by the Guangzhou Science and Technology Program under Grant 201607010098 and Grant 201804010445.
+
+M. Jiang, Y. Li, and Q. Zhang are with the School of Electronics and Information Technology, Sun Yat-sen University, Guangzhou 510006, Guangdong, China (e-mail: jmiao@mail2.sysu.edu.cn, liyiq5@mail2.sysu.edu.cn, zhqi26@mail.sysu.edu.cn). J. Qin is with the School of Electronics and
+Information Technology, Sun Yat-sen University, Guangzhou 510006, Guangdong,  China, and also with the Xinhua College, Sun Yat-sen University, Guangzhou 510520, Guangdong, China (e-mail: issqjy@mail.sysu.edu.cn). }
+}% <-this % stops a space
+	
+	
+\markboth{Submitted to IEEE Transactions on Vehicular Technology}
+{Jiang \MakeLowercase{\textit{et al.}}: Joint Position and Time Allocation Optimization of UAV Enabled WPCNs}
+	
+\maketitle
+\begin{abstract}
+Unmanned aerial vehicle (UAV) enabled communications are promising solution to provide reliable and cost-effective wireless communications
+for ground users. In this paper, we consider a UAV enabled wireless powered communication network where a UAV with constant power supply first charges all users by transmitting wireless energy to all users in the downlink simultaneously and then all users send their independent information to the UAV in the uplink by time-division multiple access. Our goal is to maximize the uplink sum achievable rate of all users by jointly optimizing the time allocation as well as the position of the UAV. To solve this non-convex problem, we first derive the closed-form optimal solution of the time allocation which is expressed as the function of UAV position. The original problem, after substituting the derived optimal time allocation, is reformulated as a new optimization problem whose optimization variable is only UAV position. We propose a sequential unconstrained convex minimization based algorithm to obtain the globally optimal solution. Simulation results demonstrate that the performance of our proposed algorithm matches with that obtained by two-dimensional exhaustive search. To reduce the computational complexity, we also propose a Dinkelbach based algorithm to obtain the locally optimal solution. Simulation results show that the performances of our proposed two algorithms are superior to the schemes without time allocation optimization and/or position optimization.
+\end{abstract}
+\begin{IEEEkeywords} Unmanned aerial vehicle (UAV), wireless powered communication network, sequential unconstrained convex minimization, Dinkelbach.
+\end{IEEEkeywords}
+\IEEEpeerreviewmaketitle
+	
+\section{introduction}
+
+QoS
+\section{System Model and Problem Formulation}
+
+Consider a wireless communication system with one MNO (mobile network operator) and $N$ VMNOs (virtual mobile network operators). With wireless network virtualization operation, the whole communication processes are divided into two stages. VMNOs will first rent wireless spectrum from the MNO and then provide customized services to their MUs (mobile users) in respective service cell. Particularly, we investigate a OFDMA (orthogonal frequency division multiple access) downlink transmission scenario, where the total bandwidth owned by MNO is $W$ Hertz (Hz). 
+
+During the first transmission stage, the bandwidth occupied by the $i$-th VMNO is denoted as $W_i$. Thus, we have
+
+\begin{align}
+\sum_{i = 0}^{N} W_i \leq W.
+\end{align}
+In this paper, without loss of generality, we assume that the $i$-th VMNO is located as the origin $o_i$. The locations of MUs are modeled as a realization of a Poisson point process (PPP) with intensity $\lambda_i$ in a fixed circular region $\mathcal{D}(o_i, r_i) \in \mathbb{R}^2$, where $r_i$ denotes the cell radius. The locations of MUs associated with the $i$-th VMNO are denoted as $\mathcal{X} = \{\mathbf{x}_{ij} \in \mathbb{R}^2 | j = 1, \cdots, N_i\}$, where $N_i = \pi r_i^2 \lambda_i$ is the expected number of MUs in the $i$-th VMNO. Note that the user set $\mathcal{X}$ changes with user arrivals, departure, or movements.
+
+Suppose that transmitted signals are affected by both large-scale path loss and fast Rayleigh fading. Thus, the channel between the $j$-th MU and its associated $i$-th VMNO is denoted by $h_{ij} = \frac{g_{ij}}{\sqrt{1 + {\left\| \mathbf{x}_{ij} \right\|}^\alpha}}$, where $g_{ij}$ denotes the Rayleigh fading channel state information (CSI), i.e., $g_{ij}$ is a complex Gaussian random variable with zero mean and unit variance. The instantaneous data rate for the $j$-th MU in the $i$-th VMNO is given by
+\begin{align}
+	R_{ij} = W_{ij}\log_2\left(1 + \frac{P_{ij} \left|h_{ij} \right|^2 }{\Gamma W_{ij}N_0}\right)
+\end{align}
+where $W_{ij}$ denotes the bandwidth of the $j$-th MU allocated by the $i$-th VMNO, $P_{ij}$ denotes the power allocated to the $j$-th MU by the $i$-th VMNO. $\Gamma$ denotes the SNR gap to the information theoretical channel capacity owing to the
+non-ideal coding and modulation in practice \cite{JGDForney}. $N_0$ denotes the power spectral density of white noise at the MU.                      
+\begin{figure}
+	\centering
+	\includegraphics[width=3.6in]{Pic1.eps}
+	\caption{Two-stage spectrum leasing network. During the first stage, VMNOs rent spectrum from an MNO based on the arrival rate and QoS of MUs. During the second stage, each VMNO allocates the obtained spectrum dynamically to a set of MUs.}
+\end{figure}
+
+The two-stage spectrum leasing processes are operated in two timescales, namely a period and a time slot. As shown in Fig. 1, the first stage is operated in a period and often measured in hours, where each VMNO rents spectrum from a MNO. The second stage is operated in a time slot and often measured in milliseconds, during which the  wireless channel fading remains constant but may change from one time slot to anther. Notice that VMNOs will not release the occupied spectrum until the end of the whole transmission. We will discuss these two stages in the following two sections.
+
+\section{Spectrum leasing and power allocation during the first stage}
+
+During the first stage, the CSI of each MU in each VMNO is a random variable. So, we first assume that the bandwidth and power allocated to all MUs in each VMNO are equal. Thus, the expected data rate of the $j$-th MU in the $i$-th VMNO is expressed as
+\begin{align}
+E\left({R}_{ij}\right) = \int_{0}^{\infty} \frac{W_i}{N_i} \log_2\left(1 + \frac{P_i x}{W_i N_0}\right) f_{\left|h_{ij} \right|^2} \left(x\right)dx
+\end{align}
+where $P_i$ denotes the total transmission power budget for the $i$-th VMNO, $f_{\left|h_{ij} \right|^2} \left(x\right)$ is the probability density function (PDF) of the random variable $\left|h_{ij} \right|^2$. 
+
+During the first stage, we aim at minimizing the total transmit power at VMNOs under the quality of service requirement at each MU in each VMNO and the total bandwidth constraint at the MNO by properly choosing the transmit power $p_i$ and the bandwidth $W_i$. Thus, the optimization problem is formulated as
+\begin{subequations}\label{q4}
+	\begin{align}
+	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W\\ \quad &  E\left({R}_{ij}\right) \geq \bar{R}_i, \ P_i \geq 0, W_i \geq 0, \ \forall i, 
+	\end{align}
+\end{subequations}
+where $\bar{R}_i$ denotes the data rate threshold at the $i$-th VMNO  \footnote{Note that in this paper, we assume that the data rate threshold at different MUs in associated with the same VMNO are equal due to the same distribution of MUs in each VMNO.}. To proceed, we will first introduce the following proposition:
+
+\textit{Proposition 1}: The cumulative distribution function (CDF) of $\left|h_{ij} \right|^2$ is $F_{\left|h_{ij} \right|^2}\left(x\right) = 1 - M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, - x r_i^{\alpha}\right)e^{-x}$, where $M\left(a,b,z\right)$ denotes the Kummer's function \cite{MAbramowitz}.
+
+
+\textit{Proof}: See Appendix A.  $\hfill\blacksquare$
+
+Using the above proposition 1, $f_{\left|h_{ij} \right|^2} \left(x\right)$ can be calculated as follows:
+\begin{align}
+&f_{\left|h_{ij} \right|^2} \left(x\right)\nonumber \\ &= \frac{d F_{\left|h\right|_{ij}^2}\left(x\right)}{d x} \nonumber \\
+&=M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, -xr_i^{\alpha}\right)e^{-x} -\frac{d M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, -x r_i^{\alpha}\right)}{d x} e^{-x} \nonumber \\
+&\overset{\left(d\right)}{=} M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, -xr_i^{\alpha}\right)e^{-x} + \nonumber \\ & \quad \ \frac{2}{2+\alpha}M\left(1 + \frac{2}{\alpha}, 2+\frac{2}{\alpha}, -xr_i^{\alpha}\right)r_i^{\alpha}e^{-x} \nonumber \\
+& = e^{-x}g\left(x\right)
+\end{align}
+where $\left(d\right)$ follows from $\frac{d M\left(a, b, z\right)}{d x} = \frac{a}{b}M\left(a+1, b+1, z\right)$ \cite[13.4.8]{MAbramowitz}, $g\left(x\right)$ is defined as follows:
+\begin{align}
+g\left(x\right) =& \frac{2r_i^{\alpha}}{2+\alpha} M\left(1 + \frac{2}{\alpha}, 2+ \frac{2}{\alpha}, -xr_i^{\alpha}\right) + \nonumber \\ & M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, -xr_i^{\alpha}\right)
+\end{align}
+
+Now, the original optimization problem \eqref{q4} can be reformulated as follows:
+\begin{subequations}\label{q7}
+	\begin{align}
+	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \label{q7a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W \label{q7b} \\ \quad &  \int_{0}^{\infty} \frac{W_i}{N_i} \log_2\left(1 + \frac{P_i x}{W_i N_0}\right) e^{-x}g\left(x\right) dx \geq \bar{R}_i, \forall i \label{q7c}\\
+	& P_i \geq 0, W_i \geq 0, \ \forall i, \label{q7d}
+	\end{align}
+\end{subequations}
+it is observed in \eqref{q7c}, the calculation of the integration is complicated and can be calculated via numerical integration. Denote the left-hand sides (LHSs) of \eqref{q7c} as $q\left(P_i, W_i\right)$. The numerical integration can be time-consuming when the integrand of $q\left(P_i, W_i\right)$ has a heavy tail. Thus, next we will apply half-range Gauss-Hermite Quadrature (HR-GHQ) to approximate $q\left(P_i, W_i\right)$ with high accuracy \cite{JSBall,NMSteen}.
+
+Based on \cite{NMSteen}, a $K$-point HR-GHQ can be written as
+\begin{align} \label{q8}
+\int_{0}^{\infty}e^{-x^2} f\left(x\right) dx \approx \sum\limits_{k = 1}^{K} a_k f\left(x_k\right)
+\end{align}
+where both the weights $\{a_k\}_{k = 1}^K$ and abscissas $\{x_k\}_{k = 1}^K$ are real numbers. After applying \eqref{q8} to $q\left(P_i, W_i\right)$, we have
+
+\begin{align}
+q\left(P_i, W_i\right) &\overset{\left(e\right)}{=} \int_{0}^{\infty}e^{-t^2} g\left(t^2\right) 2t \log_2\left(1 + \frac{P_it^2}{W_iN_0}\right)dt \frac{W_i}{N_i} \nonumber \\
+& \overset{\left(f\right)}{\approx} \sum\limits_{i = 1}^{K_i}a_{ki}g\left(t_{ki}^2\right)2t_{ki}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right)\frac{W_i}{N_i} \nonumber \\
+& \overset{\left(g\right)}{=} \sum\limits_{k = 1}^{K_i}b_{ki}\frac{W_i}{N_i}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right)
+\end{align}
+where $\left(e\right)$ follows from $x = t^2$, $\left(f\right)$ follows from \eqref{q8}, $\left(g\right)$ follows from $b_{ki} = a_{ki}g\left(t_{ki}^2\right)2t_{ki}$.
+
+Finally, the spectrum leasing allocation optimization problem can be expressed as follows:
+\begin{subequations}\label{q10}
+	\begin{align}
+	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \label{q10a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W \label{q10b} \\ \quad &  \sum\limits_{k = 1}^{K_i}b_{ki}\frac{W_i}{N_i}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right) \geq \bar{R}_i, \forall i \label{q10c}\\
+	& P_i \geq 0, W_i \geq 0, \ \forall i. \label{q10d}
+	\end{align}
+\end{subequations}
+Since problem \eqref{q10} is convex in terms of optimization variables $P_i$ and $W_i$, it can be solved efficiently by existing optimization tools such as CVX \cite{SBoyd1}.
+
+\section{Dynamic spectrum allocation and power allocation during the second stage}
+During the second stage, each VMNO dynamically allocates the spectrum that has already been rent from MNO during the first stage to MUs in its serving region. The resource allocation can be performed during different time slots and we only focus on a particular time slot. We further assume that perfect CSIs can be estimated by each VMNO at each time slot. Thus, the resource allocation optimization problem in the $i$-th VMNO can be formulated as
+\begin{subequations}\label{q11}
+	\begin{align}
+	\min_{P_{ij}, W_{ij}}\ & \sum\limits_{i = 1}^{N_i} P_{ij} \label{q11a} \\ \mbox{s.t.} \quad &  \sum\limits_{j = 1}^{N_i} W_{ij} \leq W_i \label{q11b} \\ \quad &  W_{ij}\log_2\left(1 + \frac{P_{ij}\left|h_{ij}\right|^2}{W_{ij}N_0}\right) \geq \tilde{R}_i, \forall j \label{q11c}\\
+	& P_{ij} \geq 0, W_{ij} \geq 0, \ \forall j, \label{q11d}
+	\end{align}
+\end{subequations}
+where $\tilde{R}_i$ is the Qo requirement of MUs in the $i$-th VMNO.
+
+\textit{Lemma 1}: For problem \eqref{q11}, the optimal variables $P_{ij}$ and $W_{ij}$ should satisfy that the QoS constraints in \eqref{q11c} are all active, i.e., 
+\begin{align}
+W_{ij}\log_2\left(1 + \frac{P_{ij}\left|h_{ij}\right|^2}{W_{ij}N_0}\right) = \tilde{R}_i,  \forall j
+\end{align}
+
+\textit{Proof}:  
+We prove Lemma 1 by reductio ad absurdum. Assume that $P_{ij}^o, \forall j$ are the optimal solutions to \eqref{q11} such that $W_{ij}\log_2\left(1 + \frac{P_{ij}^o\left|h_{ij}\right|^2}{W_{ij}N_0}\right) > \tilde{R}_i, \forall j$. Define a set of $\Delta P_{ij} > 0, \forall j$ such that 
+\begin{align}
+W_{ij}\log_2\left(1 + \frac{P_{ij}^o\left|h_{ij}\right|^2}{W_{ij}N_0}\right) > W_{ij}\log_2\left(1 + \frac{P_{ij}^\dag\left|h_{ij}\right|^2}{W_{ij}N_0}\right), \forall j
+\end{align}
+where $P_{ij}^\dag = P_{ij}^o - \Delta P_{ij}, \forall j$. Therefore, we can choose $\Delta P_{ij}$ appropriately such that $W_{ij}\log_2\left(1 + \frac{P_{ij}^\dag\left|h_{ij}\right|^2}{W_{ij}N_0}\right) = \tilde{R}_i, \forall j$. It is note that $P_{ij}^\dag, \forall j$ are feasible and have smaller objective function value than $P_{ij}^o, \forall j$.
+$\hfill\blacksquare$
+
+Combined with Lemma 1, problem \eqref{q11} can be equivalently written as follows:
+\begin{subequations}\label{q14}
+	\begin{align}
+	\min_{W_{ij}}\ & \sum\limits_{i = 1}^{N_i} \frac{W_{ij}N_0}{\left|h_{ij}\right|^2}\left(2^{\frac{\tilde{R}_i}{W_{ij}}} - 1\right) \label{q14a} \\ \mbox{s.t.} \quad &  \sum\limits_{j = 1}^{N_i} W_{ij} \leq W_i \label{q14b} \\
+	& W_{ij} \geq 0, \ \forall j. \label{q14c}
+	\end{align}
+\end{subequations}
+Problem \eqref{q14} is convex and can be solved by convex optimization techniques. We can obtain the optimal spectrum allocation solution for \eqref{q14} using the following proposition:
+
+\textit{Proposition 2} : The optimal spectrum allocation solution for \eqref{q14}, denoted by $W_{ij}^\star$, is
+\begin{align}
+W_{ij}^\star = \frac{\hat{R}_i}{1 + \mathcal{W}_0\left(\frac{\mu^{\star}\left|h_{ij}\right|^2 - N_0}{eN_0}\right)}, \forall j,
+\end{align}
+where $\hat{R}_i = \tilde{R}_i\ln2$, $\mathcal{W}_0\left(\phi\right)$ is the branch satisfying $\mathcal{W}\left(\phi\right) \geq -1$ and $\mathcal{W}$ denotes the Lambert $\mathcal{W}$ function of $\phi$ \cite{RMCorless}, $\mu^{\star} > 0$ is a constant and can be obtained by using one-dimension (1-D) bisection search over interval $\left[\mu_{\mbox{min}}, \mu_{\mbox{max}}\right]$ with
+\begin{align}
+\mu_{\mbox{min}} &= \frac{N_0e\left(\frac{N_i\hat{R}_i}{W_i} - 1\right)e^{\left(\frac{N_i\hat{R}_i}{W_i} - 1\right)} + N_0}{h_{\mbox{max}}}  \\
+\mu_{\mbox{max}} & = \frac{N_0e\left(\frac{N_i\hat{R}_i}{W_i} - 1\right)e^{\left(\frac{N_i\hat{R}_i}{W_i} - 1\right)} + N_0}{h_{\mbox{min}}}
+\end{align}
+where $h_{\mbox{max}}$ and $h_{\mbox{min}}$ denote the maximum and minimum channel gains among $N_i$ users in the $i$-th VMNO, respectively.
+
+\textit{Proof}: See Appendix B.  $\hfill\blacksquare$
+\section{Simulation Result}
+
+
+\appendices
+\section{Proof of Proposition 1}
+The CDF of $\left|h_{ij} \right|^2$ is calculated as follows:
+\begin{align}
+F_{\left|h_{ij} \right|^2} \left(x\right) &= Prob\left(\frac{\left|g_{ij}\right|^2}{1 + d_{ij}^{\alpha}} \leq x \right) \nonumber \\
+& = Prob \left(\left|g_{ij}\right|^2 \leq x \left(1 + d_{ij}^\alpha\right)\right) \nonumber \\
+& \overset{\left(a\right)}{=} \int_{\mathcal{D}(o_i, r_i)} \frac{1}{\pi r_i^2}\left(1 - e^{-x\left(1 + d_{ij}^{\alpha}\right)}\right) d\Delta S \nonumber\\
+& \overset{\left(b\right)}{=} \frac{1}{\pi r_i^2} \int_{0}^{r_i} \int_{-\pi}^{\pi}\left(1 - e^{-x\left(1 + y^{\alpha}\right)}\right)y d \theta d y \nonumber \\
+& = \frac{2}{r_i^2}\int_{0}^{r_i} \left(y - ye^{-x\left(1 + y^\alpha\right)}\right) dy \nonumber \\
+& = \frac{2}{r_i^2}\int_{0}^{r_i}y dy - \frac{2}{r_i^2}\int_{0}^{r_i} y e^{-x \left(1 + y^\alpha\right)}dy \nonumber \\
+& = 1 - \frac{2}{r_i^2}e^{-x} \int_{0}^{r_i}y e^{-xy^{\alpha}}dy
+\end{align}
+where $\left(a\right)$ follows from the CDF of exponential random variable $\left|g_{ij}\right|^2$, $\left(b\right)$ follows by using polar coordinates. Let $t = xy^{\alpha}$, $F_{\left|h_{ij} \right|^2} \left(x\right)$ can be further derived as follows:
+\begin{align}
+F_{\left|h_{ij} \right|^2} \left(x\right) &= 1 - \frac{2}{r_i^2}e^{-x} \int_{0}^{x r_i^{\alpha}} t^{\frac{1}{\alpha}} x^{-\frac{1}{\alpha}}e^{-t} d\left(t^{\frac{1}{\alpha}} x^{-\frac{1}{\alpha}}\right) \nonumber \\
+& = 1 - \frac{1}{\alpha} \frac{2}{r_i^2} x^{-\frac{2}{\alpha}} e^{-x} \int_{0}^{x r_i^{\alpha}} t^{\frac{2}{\alpha} - 1}e^{-t} dt \nonumber \\
+& = 1 - \frac{2}{\alpha} \left(x r_i^{\alpha}\right) ^{-\frac{2}{\alpha}} \gamma\left(\frac{2}{\alpha}, xr_i^{\alpha}\right)e^{-x} \nonumber \\
+& \overset{\left(c\right)}{=} 1 - M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, -xr_i^{\alpha}\right)e^{-x}
+\end{align}
+where $\gamma\left(s,x\right) = \int_{0}^{x}t^{s-1}e^{-t}dt$ denotes lower incomplete gamma function, $M\left(a,b,z\right)$ denotes the Kummer's function \cite{MAbramowitz}, $\left(c\right)$ follows from $\gamma\left(s,x\right) = s^{-1} x^s M\left(s,s+1,-x\right)$. Thus the proof is completed. 
+
+\section{Proof of Proposition 2}
+The Lagrangian of problem \eqref{q14} is given by
+\begin{align}
+\mathcal{L}\left(W_{ij}, \mu\right) &=  \sum\limits_{i = 1}^{N_i} \frac{W_{ij}N_0}{\left|h_{ij}\right|^2}\left(2^{\frac{\tilde{R}_i}{W_{ij}}} - 1\right) + \mu\left(\sum_{j = 1}^{N_i}W_{ij} - W_i\right) \nonumber \\ 
+& \overset{\left(h\right)}{=} \sum\limits_{i = 1}^{N_i} \frac{W_{ij}N_0}{\left|h_{ij}\right|^2}\left(e^{\frac{\hat{R}_i}{W_{ij}}} - 1\right) + \mu\left(\sum_{j = 1}^{N_i}W_{ij} - W_i\right) 
+\end{align}
+where $\mu \geq 0$ denotes the Lagrange multiplier associated with the constraint \eqref{q14b}. $\left(h\right)$ follows from $\hat{R}_i = \tilde{R}_i \ln2$. Thus, the dual function of problem \eqref{q14} is given by
+\begin{align}
+\mathcal{G}\left(\mu\right) = \max_{W_{ij}\geq 0} \mathcal{L}\left(W_{ij},\mu\right)
+\end{align}
+
+It can be seen from problem \eqref{q14} that there exist a set of $W_{ij}$ with $W_{ij} \geq 0$, satisfying $\sum\limits_{j = 1}^{N_i} W_{ij} \leq W_i, \forall j$. Thus, thanks to the Slater's condition, strong duality for problem \eqref{q14} holds. The Karush-Kuhn-Tucker (KKT) conditions which are both necessary and 	sufficient for the  global optimality of problem \eqref{q14} is given by
+\begin{align}
+\frac{\partial \mathcal{L}\left({W_{ij}^\star}, \mu^\star\right)}{\partial W_{ij}} &= 0 \label{q20} \\
+\mu^\star\left(\sum\limits_{j = 1}^{N_i}W_{ij}^\star - W_i\right) &= 0 \label{q21} \\
+\sum\limits_{j = 1}^{N_i}W_{ij}^\star - W_i & \leq 0 \label{q22}
+\end{align} 
+where $W_{ij}^\star$ and $\mu^\star$ denote the optimal primal and dual solutions of problem \eqref{q14}, respectively. It can be easily verified that $\sum\limits_{j = 1}^{N_i} W_{ij}^\star = W_i$ must hold for problem \eqref{q14}. Thus, from \eqref{q21}, we have $\mu^\star > 0$. From \eqref{q20}, it follows that 
+\begin{align}
+\frac{\partial \mathcal{L} \left(W_{ij}^\star, \mu^\star \right)}{\partial W_{ij}} &= \frac{N_0}{\left|h_{ij}\right|^2} \left(e^{\frac{\hat{R}}{W_{ij}^\star}} -  \frac{\hat{R}_i}{W_{ij}^\star} e^{\frac{\hat{R}_i}{W_{ij}^\star}} - 1\right) + \mu^\star \label{q24} \\
+& =  \frac{N_0}{\left|h_{ij}\right|^2}\left(\left(1 - \frac{\hat{R}_i}{W_{ij}^\star}\right)e^{\frac{\hat{R}_i}{W_{ij}^\star} - 1}e - 1\right) + \mu^\star \\
+& = 0. \label{q25}
+\end{align}
+From \eqref{q24} and \eqref{q25}, we have
+\begin{align}
+\left(\frac{\hat{R}_i}{W_{ij}^\star} - 1\right) e^{\frac{\hat{R}}{W_{ij}^\star} - 1} = \frac{\mu^\star \left|h_{ij}\right|^2 - N_0}{N_0 e},
+\end{align}
+according to the definition of Lambert $\mathcal{W}$ function, we can obtain the optimal $W_{ij}^\star$ as follows:
+\begin{align}
+W_{ij}^\star = \frac{\hat{R}_i}{1 + \mathcal{W}_0\left(\frac{\mu^\star \left|h_{ij}\right|^2 - N_0}{N_0 e}\right)} \label{q29},
+\end{align}
+where $\mathcal{W}_0\left(\phi\right)$ is the branch satisfying $\mathcal{W}\left(\phi\right) \geq -1$, $\mathcal{W}$ denotes the Lambert $\mathcal{W}$ function of $\phi$ \cite{RMCorless} and the optimal $\mu\star$ can be obtained via a 1-D bisection search over $\left[\mu_{\mbox{min}}, \mu_{\mbox{max}}\right]$ with $\mu_{\mbox{min}} $ and $\mu_{\mbox{max}}$ derived as follows.
+
+Denote the maximum and minimum channel gains among $N_i$ users in the $i$-th VMNO as $h_{\mbox{max}}$ and $h_{\mbox{min}}$  , respectively. Thus, we have
+\begin{align}
+h_{\mbox{min}} \leq \left|h_{ij}\right|^2 \leq h_{\mbox{max}}.
+\end{align}
+Since $\mathcal{W}\left(x\right)$ is monotonically increasing when $x \geq 0$, it follows that
+\begin{align}
+&\mathcal{W}_0\left(\frac{\mu^\star h_{\mbox{min}} - N_0}{N_0e}\right) \nonumber \\ & \leq  \mathcal{W}_0 \left(\frac{\mu^\star\left|h_{ij}\right|^2 - N_0}{N_0e}\right) \leq  \mathcal{W}_0\left(\frac{\mu^\star h_{\mbox{max}} - N_0}{N_0e}\right)
+\end{align}
+Combined with \eqref{q29}, the above inequality can be reformulated as
+\begin{align}
+\frac{\hat{R}_i}{1 + \mathcal{W}_0\left(\frac{\mu^\star h_{\mbox{max}} - N_0}{N_0e}\right)} \leq W_{ij}^\star \leq \frac{\hat{R}_i}{1 + \mathcal{W}_0\left(\frac{\mu^\star h_{\mbox{min}} - N_0}{N_0e}\right)} \label{q32}
+\end{align}
+After multiplying each term with $N_i$, inequality \eqref{q32} can be recast as
+\begin{align}
+\frac{N_i\hat{R}_i}{1 + \mathcal{W}_0\left(\frac{\mu^\star h_{\mbox{max}} - N_0}{N_0e}\right)} \leq W_{i} \leq \frac{N_i\hat{R}_i}{1 + \mathcal{W}_0\left(\frac{\mu^\star h_{\mbox{min}} - N_0}{N_0e}\right)} 
+\end{align}
+Finally, we have
+\begin{align}
+\mu_{\mbox{min}} \leq \mu^\star \leq \mu_{\mbox{max}}
+\end{align}
+where 
+\begin{align}
+\mu_{\mbox{min}} &= \frac{N_0e\left(\frac{N_i\hat{R}_i}{W_i} - 1\right)e^{\left(\frac{N_i\hat{R}_i}{W_i} - 1\right)} + N_0}{h_{\mbox{max}}}  \\
+\mu_{\mbox{max}} & = \frac{N_0e\left(\frac{N_i\hat{R}_i}{W_i} - 1\right)e^{\left(\frac{N_i\hat{R}_i}{W_i} - 1\right)} + N_0}{h_{\mbox{min}}}
+\end{align}
+The proof is completed.
+ 
+\begin{thebibliography}{1}	
+\bibitem{JGDForney}J. G. D. Forney and G. Ungerboeck, ``Modulation and coding for linear gaussian channels," \emph{IEEE Trans. Inf. Theory}, vol. 44, no. 6, Oct. 1998.
+
+\bibitem{MAbramowitz}M. Abramowitz and I. A. Stegun, Handbook of mathematical functions: with formulas, graphs, and mathematical tables, vol. 55. \emph{Courier Corporation}, 1965.
+
+\bibitem{JSBall}J. S. Ball, ``Half-range generalized Hermite polynomials and the related Gaussian quadratures," \emph{SIAM J. Numer. Anal.}, vol. 40, no. 6, pp. 2311-2317, 2002.
+
+\bibitem{NMSteen}N. M. Steen, G. D. Byrne, and E. M. Gelbard, ``Gaussian quadratures for the integrals $\int_{0}^{\infty} e^{-x^2}f\left(x\right) dx$ and $\int_{0}^{b}e^{-x^2}f\left(x\right)dx$," \emph{ Math. Comput.}, vol. 23, no. 107, pp. 661-671, 1969.
+
+\bibitem{SBoyd1}M. Grant and S. Boyd, \emph{CVX: MATLAB Software for Disciplined Convex Programming.} Version 2.1, 2016, available: http://cvxr.com/cvx.
+
+\bibitem{RMCorless}R. M. Corless, G. H. Gonnet, D. E. G. Hare, D. J. Jeffrey, and D. E.
+Knuth, ``On the Lambert W function," \emph{Adv. Comput. Math.}, vol. 5, pp. 329-359, 1996.
+\end{thebibliography}
+
+
+\end{document}
