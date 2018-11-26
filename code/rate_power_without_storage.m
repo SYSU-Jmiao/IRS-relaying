@@ -169,7 +169,7 @@ end
 markers = ['+','x','*','^','s','o'];
 l_c = strings(6,1);
 for i = 1:K
-    l_c(i) = '('+string(l1(i))+','+string(l2(i))+')';
+    l_c(i) = 'r_'+string(i)+'='+string(l1(i*100))+'m, \lambda_'+string(i)+'='+string(l2(i)*2400)+'users/km^2';
 end
 
 figure;
