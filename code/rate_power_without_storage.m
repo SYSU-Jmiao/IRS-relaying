@@ -2,11 +2,11 @@
 clearvars
 close all
 clc
-MAX_IMPLEMENT = 1e4;
+MAX_IMPLEMENT = 1e2;
 hasSimulation = 1;
 K_all = 4:14;
 K = 6; %BS number
-Wmax_all = 1e8*(1:1:10);
+Wmax_all = 1e8*(0.2:0.1:1.1);
 Wmax = 1e8; %Total bandwidth 100MHz
 Rmin_all = 1e6*(0.1:0.1:1);
 Rmin = 1e6; %1M bps
@@ -151,12 +151,12 @@ if hasSimulation
     p_sum_result_mean3 = squeeze(f(p_sum_result3,2));
     %%
     figure;
-    xt = alpha_all(1:10);
-    xlabel('\alpha')
+%     xt = alpha_all(1:10);
+%     xlabel('\alpha')
 %     xt=Rmin_all/1e6;
-%     xlabel('R(Mbps)')
-%         xt=Wmax_all/1e6;
-%         xlabel('W_{max}(MHz)')
+%     xlabel('R_{min}(Mbps)')
+        xt=Wmax_all/1e6;
+        xlabel('W_{max}(MHz)')
     hold on
     plot(xt,30+pow2db(p_sum_result_mean),'-k*')
     plot(xt,30+pow2db(p_sum_result_mean1),'-ks')
@@ -176,8 +176,8 @@ figure;
 hold on
 ylabel('Spectrum ratio');
 % xlabel('R_{min}(Mbps)');
-%         xlabel('W_{max}(MHz)')
-xlabel('\alpha')
+        xlabel('W_{max}(MHz)')
+% xlabel('\alpha')
 for i = 1:K
     plot(xt,W_all(:,i),['-k',markers(i)]);
 end
