@@ -42,15 +42,15 @@ for ground users. In this paper, we consider a UAV enabled wireless powered comm
 	
 \section{introduction}
 
-QoS
+QoS  survey
 \section{System Model and Problem Formulation}
 
-Consider a wireless communication system with one MNO (mobile network operator) and $N$ VMNOs (virtual mobile network operators). With wireless network virtualization operation, the whole communication processes are divided into two stages. VMNOs will first rent wireless spectrum from the MNO and then provide customized services to their MUs (mobile users) in respective service cell. Particularly, we investigate a OFDMA (orthogonal frequency division multiple access) downlink transmission scenario, where the total bandwidth owned by MNO is $W$ Hertz (Hz). 
+Consider a wireless communication system with one MNO (mobile network operator) and $N$ VMNOs (virtual mobile network operators). With wireless network virtualization operation, the whole communication processes are divided into two stages. VMNOs will first rent wireless spectrum from the MNO and then provide customized services to their MUs (mobile users) in respective service cell. Particularly, we investigate a OFDMA (orthogonal frequency division multiple access) downlink transmission scenario, where the total bandwidth owned by MNO is $W_{sum}$ Hertz (Hz). 
 
 During the first transmission stage, the bandwidth occupied by the $i$-th VMNO is denoted as $W_i$. Thus, we have
 
 \begin{align}
-\sum_{i = 0}^{N} W_i \leq W.
+\sum_{i = 0}^{N} W_i \leq W_{sum}.
 \end{align}
 In this paper, without loss of generality, we assume that the $i$-th VMNO is located as the origin $o_i$. The locations of MUs are modeled as a realization of a Poisson point process (PPP) with intensity $\lambda_i$ in a fixed circular region $\mathcal{D}(o_i, r_i) \in \mathbb{R}^2$, where $r_i$ denotes the cell radius. The locations of MUs associated with the $i$-th VMNO are denoted as $\mathcal{X} = \{\mathbf{x}_{ij} \in \mathbb{R}^2 | j = 1, \cdots, N_i\}$, where $N_i = \pi r_i^2 \lambda_i$ is the expected number of MUs in the $i$-th VMNO. Note that the user set $\mathcal{X}$ changes with user arrivals, departure, or movements.
 
@@ -66,7 +66,7 @@ non-ideal coding and modulation in practice \cite{JGDForney}. $N_0$ denotes the 
 	\caption{Two-stage spectrum leasing network. During the first stage, VMNOs rent spectrum from an MNO based on the arrival rate and QoS of MUs. During the second stage, each VMNO allocates the obtained spectrum dynamically to a set of MUs.}
 \end{figure}
 
-The two-stage spectrum leasing processes are operated in two timescales, namely a period and a time slot. As shown in Fig. 1, the first stage is operated in a period and often measured in hours, where each VMNO rents spectrum from a MNO. The second stage is operated in a time slot and often measured in milliseconds, during which the  wireless channel fading remains constant but may change from one time slot to anther. Notice that VMNOs will not release the occupied spectrum until the end of the whole transmission. We will discuss these two stages in the following two sections.
+The two-stage spectrum leasing processes are operated in two timescales, namely a period and a time slot. As shown in Fig. 1, the first stage is operated in a period and often measured in hours, where each VMNO rents wireless spectrum from a MNO. The second stage is operated in a time slot and often measured in milliseconds, during which the  wireless channel fading remains constant but may change from one time slot to anther. Notice that VMNOs will not release the occupied spectrum until the end of the whole transmission. We will discuss these two stages in the following two sections.
 
 \section{Spectrum leasing and power allocation during the first stage}
 
@@ -76,13 +76,13 @@ E\left({R}_{ij}\right) = \int_{0}^{\infty} \frac{W_i}{N_i} \log_2\left(1 + \frac
 \end{align}
 where $P_i$ denotes the total transmission power budget for the $i$-th VMNO, $f_{\left|h_{ij} \right|^2} \left(x\right)$ is the probability density function (PDF) of the random variable $\left|h_{ij} \right|^2$. 
 
-During the first stage, we aim at minimizing the total transmit power at VMNOs under the quality of service requirement at each MU in each VMNO and the total bandwidth constraint at the MNO by properly choosing the transmit power $p_i$ and the bandwidth $W_i$. Thus, the optimization problem is formulated as
+During the first stage, we aim at minimizing the total transmit power at VMNOs under the QoS requirement at each MU in each VMNO and the total bandwidth constraint at the MNO by properly choosing the transmit power $P_i$ and the bandwidth $W_i$. Thus, the optimization problem is formulated as
 \begin{subequations}\label{q4}
 	\begin{align}
-	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W\\ \quad &  E\left({R}_{ij}\right) \geq \bar{R}_i, \ P_i \geq 0, W_i \geq 0, \ \forall i, 
+	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W_{sum}\\ \quad &  E\left({R}_{ij}\right) \geq \bar{R}_i, \ P_i \geq 0, W_i \geq 0, \ \forall i, 
 	\end{align}
 \end{subequations}
-where $\bar{R}_i$ denotes the data rate threshold at the $i$-th VMNO  \footnote{Note that in this paper, we assume that the data rate threshold at different MUs in associated with the same VMNO are equal due to the same distribution of MUs in each VMNO.}. To proceed, we will first introduce the following proposition:
+where $\bar{R}_i$ denotes the data rate threshold at the $i$-th VMNO  \footnote{Note that in this paper, we assume that the data rate thresholds at different MUs which associated with the same VMNO are equal due to the same distribution of different MUs in each VMNO.}. To proceed, we will first introduce the following proposition:
 
 \textit{Proposition 1}: The cumulative distribution function (CDF) of $\left|h_{ij} \right|^2$ is $F_{\left|h_{ij} \right|^2}\left(x\right) = 1 - M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, - x r_i^{\alpha}\right)e^{-x}$, where $M\left(a,b,z\right)$ denotes the Kummer's function \cite{MAbramowitz}.
 
@@ -98,17 +98,17 @@ Using the above proposition 1, $f_{\left|h_{ij} \right|^2} \left(x\right)$ can b
 \end{align}
 where $\left(d\right)$ follows from $\frac{d M\left(a, b, z\right)}{d x} = \frac{a}{b}M\left(a+1, b+1, z\right)$ \cite[13.4.8]{MAbramowitz}, $g\left(x\right)$ is defined as follows:
 \begin{align}
-g\left(x\right) =& \frac{2r_i^{\alpha}}{2+\alpha} M\left(1 + \frac{2}{\alpha}, 2+ \frac{2}{\alpha}, -xr_i^{\alpha}\right) + \nonumber \\ & M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, -xr_i^{\alpha}\right)
+g\left(x\right) =& \frac{2r_i^{\alpha}}{2+\alpha} M\left(1 + \frac{2}{\alpha}, 2+ \frac{2}{\alpha}, -xr_i^{\alpha}\right) + \nonumber \\ & M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, -xr_i^{\alpha}\right).
 \end{align}
 
 Now, the original optimization problem \eqref{q4} can be reformulated as follows:
 \begin{subequations}\label{q7}
 	\begin{align}
-	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \label{q7a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W \label{q7b} \\ \quad &  \int_{0}^{\infty} \frac{W_i}{N_i} \log_2\left(1 + \frac{P_i x}{W_i N_0}\right) e^{-x}g\left(x\right) dx \geq \bar{R}_i, \forall i \label{q7c}\\
+	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \label{q7a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W_{sum} \label{q7b} \\ \quad &  \int_{0}^{\infty} \frac{W_i}{N_i} \log_2\left(1 + \frac{P_i x}{W_i N_0}\right) e^{-x}g\left(x\right) dx \geq \bar{R}_i, \forall i \label{q7c}\\
 	& P_i \geq 0, W_i \geq 0, \ \forall i, \label{q7d}
 	\end{align}
 \end{subequations}
-it is observed in \eqref{q7c}, the calculation of the integration is complicated and can be calculated via numerical integration. Denote the left-hand sides (LHSs) of \eqref{q7c} as $q\left(P_i, W_i\right)$. The numerical integration can be time-consuming when the integrand of $q\left(P_i, W_i\right)$ has a heavy tail. Thus, next we will apply half-range Gauss-Hermite Quadrature (HR-GHQ) to approximate $q\left(P_i, W_i\right)$ with high accuracy \cite{JSBall,NMSteen}.
+it is observed in \eqref{q7c}, the calculation of the integration is complicated and can be calculated via numerical integration. Denote the left-hand sides (LHSs) of \eqref{q7c} as $q\left(P_i, W_i\right)$. The numerical integration can be very time-consuming when the integrand of $q\left(P_i, W_i\right)$ has a heavy tail. Thus, next we will apply half-range Gauss-Hermite Quadrature (HR-GHQ) to approximate $q\left(P_i, W_i\right)$ with high accuracy \cite{JSBall,NMSteen}.
 
 Based on \cite{NMSteen}, a $K$-point HR-GHQ can be written as
 \begin{align} \label{q8}
@@ -117,8 +117,8 @@ Based on \cite{NMSteen}, a $K$-point HR-GHQ can be written as
 where both the weights $\{a_k\}_{k = 1}^K$ and abscissas $\{x_k\}_{k = 1}^K$ are real numbers. After applying \eqref{q8} to $q\left(P_i, W_i\right)$, we have
 
 \begin{align}
-q\left(P_i, W_i\right) &\overset{\left(e\right)}{=} \int_{0}^{\infty}e^{-t^2} g\left(t^2\right) 2t \log_2\left(1 + \frac{P_it^2}{W_iN_0}\right)dt \frac{W_i}{N_i} \nonumber \\
-& \overset{\left(f\right)}{\approx} \sum\limits_{i = 1}^{K_i}a_{ki}g\left(t_{ki}^2\right)2t_{ki}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right)\frac{W_i}{N_i} \nonumber \\
+q\left(P_i, W_i\right) &\overset{\left(e\right)}{=} \int_{0}^{\infty}e^{-t^2}\frac{W_i}{N_i} g\left(t^2\right) 2t \log_2\left(1 + \frac{P_it^2}{W_iN_0}\right)dt  \nonumber \\
+& \overset{\left(f\right)}{\approx} \sum\limits_{i = 1}^{K_i}a_{ki}\frac{W_i}{N_i}g\left(t_{ki}^2\right)2t_{ki}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right) \nonumber \\
 & \overset{\left(g\right)}{=} \sum\limits_{k = 1}^{K_i}b_{ki}\frac{W_i}{N_i}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right)
 \end{align}
 where $\left(e\right)$ follows from $x = t^2$, $\left(f\right)$ follows from \eqref{q8}, $\left(g\right)$ follows from $b_{ki} = a_{ki}g\left(t_{ki}^2\right)2t_{ki}$.
@@ -126,21 +126,21 @@ where $\left(e\right)$ follows from $x = t^2$, $\left(f\right)$ follows from \eq
 Finally, the spectrum leasing allocation optimization problem can be expressed as follows:
 \begin{subequations}\label{q10}
 	\begin{align}
-	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \label{q10a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W \label{q10b} \\ \quad &  \sum\limits_{k = 1}^{K_i}b_{ki}\frac{W_i}{N_i}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right) \geq \bar{R}_i, \forall i \label{q10c}\\
+	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \label{q10a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W_{sum} \label{q10b} \\ \quad &  \sum\limits_{k = 1}^{K_i}b_{ki}\frac{W_i}{N_i}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right) \geq \bar{R}_i, \forall i \label{q10c}\\
 	& P_i \geq 0, W_i \geq 0, \ \forall i. \label{q10d}
 	\end{align}
 \end{subequations}
 Since problem \eqref{q10} is convex in terms of optimization variables $P_i$ and $W_i$, it can be solved efficiently by existing optimization tools such as CVX \cite{SBoyd1}.
 
 \section{Dynamic spectrum allocation and power allocation during the second stage}
-During the second stage, each VMNO dynamically allocates the spectrum that has already been rent from MNO during the first stage to MUs in its serving region. The resource allocation can be performed during different time slots and we only focus on a particular time slot. We further assume that perfect CSIs can be estimated by each VMNO at each time slot. Thus, the resource allocation optimization problem in the $i$-th VMNO can be formulated as
+During the second stage, each VMNO dynamically allocates the spectrum that has already been rent from MNO during the first stage to MUs in its serving region. The resource allocation can be performed during different time slots at the second stage and we only focus on a particular time slot. We further assume that perfect CSIs can be estimated by each VMNO at each time slot. Thus, the resource allocation optimization problem in the $i$-th VMNO can be formulated as
 \begin{subequations}\label{q11}
 	\begin{align}
 	\min_{P_{ij}, W_{ij}}\ & \sum\limits_{i = 1}^{N_i} P_{ij} \label{q11a} \\ \mbox{s.t.} \quad &  \sum\limits_{j = 1}^{N_i} W_{ij} \leq W_i \label{q11b} \\ \quad &  W_{ij}\log_2\left(1 + \frac{P_{ij}\left|h_{ij}\right|^2}{W_{ij}N_0}\right) \geq \tilde{R}_i, \forall j \label{q11c}\\
 	& P_{ij} \geq 0, W_{ij} \geq 0, \ \forall j, \label{q11d}
 	\end{align}
 \end{subequations}
-where $\tilde{R}_i$ is the Qo requirement of MUs in the $i$-th VMNO.
+where $\tilde{R}_i$ is the QoS requirement of MUs in the $i$-th VMNO.
 
 \textit{Lemma 1}: For problem \eqref{q11}, the optimal variables $P_{ij}$ and $W_{ij}$ should satisfy that the QoS constraints in \eqref{q11c} are all active, i.e., 
 \begin{align}
@@ -176,12 +176,54 @@ where $\hat{R}_i = \tilde{R}_i\ln2$, $\mathcal{W}_0\left(\phi\right)$ is the bra
 where $h_{\mbox{max}}$ and $h_{\mbox{min}}$ denote the maximum and minimum channel gains among $N_i$ users in the $i$-th VMNO, respectively.
 
 \textit{Proof}: See Appendix B.  $\hfill\blacksquare$
-\section{Simulation Result}
+\section{Simulation Results}
+In this section, we evaluate the performance of our proposed spectrum leasing and allocation policies through numerical results. We consider a multicell system consisting of six circular areas ($N = 6$) and each VMNO is located at the center of the cell. 
 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.6in]{SR_convergence.eps}
+	\caption{Average achievable rate of the cell-edge user, $\zeta_e$, versus the achievable rate constraint from base station to central user, $\bar{\xi}_c$; performance comparisons of our proposed cooperative NOMA transmission scheme with CCCP-based algorithm and closed-form search based suboptimal algorithm, conventional NOMA and OMA schemes without cooperation where $P_b=30$ dBm and $P_c=20$ dBm.}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.6in]{P_alpha.eps}
+	\caption{.}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.6in]{P_rmin.eps}
+	\caption{.}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.6in]{P_wsum.eps}
+	\caption{.}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.6in]{SR_rmin.eps}
+	\caption{.}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=3.6in]{SR_wsum.eps}
+	\caption{.}
+\end{figure}
+
+\section{Conclusion}
 
 \appendices
 \section{Proof of Proposition 1}
 The CDF of $\left|h_{ij} \right|^2$ is calculated as follows:
+
 \begin{align}
 F_{\left|h_{ij} \right|^2} \left(x\right) &= Prob\left(\frac{\left|g_{ij}\right|^2}{1 + d_{ij}^{\alpha}} \leq x \right) \nonumber \\
 & = Prob \left(\left|g_{ij}\right|^2 \leq x \left(1 + d_{ij}^\alpha\right)\right) \nonumber \\
@@ -191,14 +233,14 @@ F_{\left|h_{ij} \right|^2} \left(x\right) &= Prob\left(\frac{\left|g_{ij}\right|
 & = \frac{2}{r_i^2}\int_{0}^{r_i}y dy - \frac{2}{r_i^2}\int_{0}^{r_i} y e^{-x \left(1 + y^\alpha\right)}dy \nonumber \\
 & = 1 - \frac{2}{r_i^2}e^{-x} \int_{0}^{r_i}y e^{-xy^{\alpha}}dy
 \end{align}
-where $\left(a\right)$ follows from the CDF of exponential random variable $\left|g_{ij}\right|^2$, $\left(b\right)$ follows by using polar coordinates. Let $t = xy^{\alpha}$, $F_{\left|h_{ij} \right|^2} \left(x\right)$ can be further derived as follows:
+where $\left(a\right)$ follows from the CDF of the exponential random variable $\left|g_{ij}\right|^2$, $\left(b\right)$ follows by using polar coordinates. Let $t = xy^{\alpha}$, $F_{\left|h_{ij} \right|^2} \left(x\right)$ can be further derived as follows:
 \begin{align}
 F_{\left|h_{ij} \right|^2} \left(x\right) &= 1 - \frac{2}{r_i^2}e^{-x} \int_{0}^{x r_i^{\alpha}} t^{\frac{1}{\alpha}} x^{-\frac{1}{\alpha}}e^{-t} d\left(t^{\frac{1}{\alpha}} x^{-\frac{1}{\alpha}}\right) \nonumber \\
 & = 1 - \frac{1}{\alpha} \frac{2}{r_i^2} x^{-\frac{2}{\alpha}} e^{-x} \int_{0}^{x r_i^{\alpha}} t^{\frac{2}{\alpha} - 1}e^{-t} dt \nonumber \\
 & = 1 - \frac{2}{\alpha} \left(x r_i^{\alpha}\right) ^{-\frac{2}{\alpha}} \gamma\left(\frac{2}{\alpha}, xr_i^{\alpha}\right)e^{-x} \nonumber \\
 & \overset{\left(c\right)}{=} 1 - M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, -xr_i^{\alpha}\right)e^{-x}
 \end{align}
-where $\gamma\left(s,x\right) = \int_{0}^{x}t^{s-1}e^{-t}dt$ denotes lower incomplete gamma function, $M\left(a,b,z\right)$ denotes the Kummer's function \cite{MAbramowitz}, $\left(c\right)$ follows from $\gamma\left(s,x\right) = s^{-1} x^s M\left(s,s+1,-x\right)$. Thus the proof is completed. 
+where $\gamma\left(s,x\right) = \int_{0}^{x}t^{s-1}e^{-t}dt$ denotes the lower incomplete gamma function, $M\left(a,b,z\right)$ denotes the Kummer's function \cite{MAbramowitz}, $\left(c\right)$ follows from $\gamma\left(s,x\right) = s^{-1} x^s M\left(s,s+1,-x\right)$. Thus the proof is completed. 
 
 \section{Proof of Proposition 2}
 The Lagrangian of problem \eqref{q14} is given by
@@ -208,10 +250,10 @@ The Lagrangian of problem \eqref{q14} is given by
 \end{align}
 where $\mu \geq 0$ denotes the Lagrange multiplier associated with the constraint \eqref{q14b}. $\left(h\right)$ follows from $\hat{R}_i = \tilde{R}_i \ln2$. Thus, the dual function of problem \eqref{q14} is given by
 \begin{align}
-\mathcal{G}\left(\mu\right) = \max_{W_{ij}\geq 0} \mathcal{L}\left(W_{ij},\mu\right)
+\mathcal{G}\left(\mu\right) = \min_{W_{ij}\geq 0} \mathcal{L}\left(W_{ij},\mu\right)
 \end{align}
 
-It can be seen from problem \eqref{q14} that there exist a set of $W_{ij}$ with $W_{ij} \geq 0$, satisfying $\sum\limits_{j = 1}^{N_i} W_{ij} \leq W_i, \forall j$. Thus, thanks to the Slater's condition, strong duality for problem \eqref{q14} holds. The Karush-Kuhn-Tucker (KKT) conditions which are both necessary and 	sufficient for the  global optimality of problem \eqref{q14} is given by
+It can be seen from problem \eqref{q14} that there exist a set of $W_{ij}$ with $W_{ij} \geq 0$, satisfying $\sum\limits_{j = 1}^{N_i} W_{ij} \leq W_i, \forall j$. Thus, thanks to the Slater's condition, strong duality for problem \eqref{q14} holds. The Karush-Kuhn-Tucker (KKT) conditions which are both necessary and 	sufficient for the  global optimality of problem \eqref{q14} are given by
 \begin{align}
 \frac{\partial \mathcal{L}\left({W_{ij}^\star}, \mu^\star\right)}{\partial W_{ij}} &= 0 \label{q20} \\
 \mu^\star\left(\sum\limits_{j = 1}^{N_i}W_{ij}^\star - W_i\right) &= 0 \label{q21} \\
