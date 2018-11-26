@@ -3,7 +3,7 @@ clearvars
 close all
 clc
 MAX_IMPLEMENT = 1e2;
-hasSimulation = 1;
+hasSimulation = 0;
 K_all = 4:14;
 K = 6; %BS number
 Wmax_all = 1e8*(0.2:0.1:1.1);
@@ -16,7 +16,7 @@ Gamma = db2pow(-174+9.8+8-10+15.3-30);
 % l1 = ones(1,K);
 % l1 = 1-K/2*0.1+0.1*(1:K);
 l1 = [0.8,0.8,1.0,1.0,1.2,1.2];
-l2 = [1.2,0.8,0.8,1.0,1.0,1.2];s
+l2 = [1.2,0.8,0.8,1.0,1.0,1.2];
 R_all = radius.*l1;
 % l2 = 1+K/2*0.1-0.1*(1:K);
 % l2 = l1;
@@ -53,8 +53,8 @@ W = 1/K*ones(K,1);
 for rate_i = 1:length(Rmin_all)
     tic
     fprintf("r = %d\n", rate_i);
-%     Rmin = Rmin_all(rate_i);
-    Wmax = Wmax_all(rate_i);
+    Rmin = Rmin_all(rate_i);
+%     Wmax = Wmax_all(rate_i);
 %     alpha = alpha_all(rate_i);
 %     W0 = W;
     W0 = 1/K*ones(K,1);
@@ -156,7 +156,7 @@ if hasSimulation
 %     xt=Rmin_all/1e6;
 %     xlabel('R_{min}(Mbps)')
         xt=Wmax_all/1e6;
-        xlabel('W_{max}(MHz)')
+        xlabel('W_{sum}(MHz)')
     hold on
     plot(xt,30+pow2db(p_sum_result_mean),'-k*')
     plot(xt,30+pow2db(p_sum_result_mean1),'-ks')
@@ -169,26 +169,29 @@ end
 markers = ['+','x','*','^','s','o'];
 l_c = strings(6,1);
 for i = 1:K
-    l_c(i) = 'r_'+string(i)+'='+string(l1(i*100))+'m, \lambda_'+string(i)+'='+string(l2(i)*2400)+'users/km^2';
+    l_c(i) = 'r_'+string(i)+'='+string(l1(i)*100)+'m, \lambda_'+string(i)+'='+string(l2(i)*2000)+'/km^2';
 end
 
 figure;
 hold on
 ylabel('Spectrum ratio');
 % xlabel('R_{min}(Mbps)');
-        xlabel('W_{max}(MHz)')
+        xlabel('W_{sum}(MHz)')
 % xlabel('\alpha')
 for i = 1:K
     plot(xt,W_all(:,i),['-k',markers(i)]);
 end
 legend(l_c)
+set(gca,'box','on')
 
 figure
 hold on
 ylabel('Spectrum ratio');
-xlabel('Iteratons');
-iter_i = 5;
+xlabel('Iterations');
+iter_i = 10;
+[~,max_iter] = size(hist(iter_i).W(i,:));
 for i = 1:K
-    plot(hist(iter_i).W(i,:),['-k',markers(i)]);
+    plot(0:(max_iter-1),hist(iter_i).W(i,:),['-k',markers(i)]);
 end
 legend(l_c)
+set(gca,'box','on')
