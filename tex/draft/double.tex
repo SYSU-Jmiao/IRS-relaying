@@ -17,7 +17,7 @@
 
 \begin{document}
 	
-\title{Joint Position and Time Allocation Optimization of UAV Enabled Wireless Powered Communication Networks}
+\title{Joint Spectrum Leasing and Power Allocation Optimization of Virtual Mobile Network}
 	
 \author{Miao Jiang, Yiqing Li, Qi Zhang, \emph{Member}, \emph{IEEE}, and Jiayin Qin
 
@@ -29,7 +29,7 @@ Information Technology, Sun Yat-sen University, Guangzhou 510006, Guangdong,  Ch
 	
 	
 \markboth{Submitted to IEEE Transactions on Vehicular Technology}
-{Jiang \MakeLowercase{\textit{et al.}}: Joint Position and Time Allocation Optimization of UAV Enabled WPCNs}
+{Jiang \MakeLowercase{\textit{et al.}}: Joint Spectrum Leasing and Power Allocation Optimization of Virtual Mobile Network}
 	
 \maketitle
 \begin{abstract}
@@ -42,7 +42,7 @@ for ground users. In this paper, we consider a UAV enabled wireless powered comm
 	
 \section{introduction}
 
-QoS  survey
+QoS  survey the alternating direction method of multipliers (ADMM)
 \section{System Model and Problem Formulation}
 
 Consider a wireless communication system with one MNO (mobile network operator) and $N$ VMNOs (virtual mobile network operators). With wireless network virtualization operation, the whole communication processes are divided into two stages. VMNOs will first rent wireless spectrum from the MNO and then provide customized services to their MUs (mobile users) in respective service cell. Particularly, we investigate a OFDMA (orthogonal frequency division multiple access) downlink transmission scenario, where the total bandwidth owned by MNO is $W_{sum}$ Hertz (Hz). 
@@ -54,7 +54,7 @@ During the first transmission stage, the bandwidth occupied by the $i$-th VMNO i
 \end{align}
 In this paper, without loss of generality, we assume that the $i$-th VMNO is located as the origin $o_i$. The locations of MUs are modeled as a realization of a Poisson point process (PPP) with intensity $\lambda_i$ in a fixed circular region $\mathcal{D}(o_i, r_i) \in \mathbb{R}^2$, where $r_i$ denotes the cell radius. The locations of MUs associated with the $i$-th VMNO are denoted as $\mathcal{X} = \{\mathbf{x}_{ij} \in \mathbb{R}^2 | j = 1, \cdots, N_i\}$, where $N_i = \pi r_i^2 \lambda_i$ is the expected number of MUs in the $i$-th VMNO. Note that the user set $\mathcal{X}$ changes with user arrivals, departure, or movements.
 
-Suppose that transmitted signals are affected by both large-scale path loss and fast Rayleigh fading. Thus, the channel between the $j$-th MU and its associated $i$-th VMNO is denoted by $h_{ij} = \frac{g_{ij}}{\sqrt{1 + {\left\| \mathbf{x}_{ij} \right\|}^\alpha}}$, where $g_{ij}$ denotes the Rayleigh fading channel state information (CSI), i.e., $g_{ij}$ is a complex Gaussian random variable with zero mean and unit variance. The instantaneous data rate for the $j$-th MU in the $i$-th VMNO is given by
+Suppose that transmitted signals are affected by both large-scale path loss and fast Rayleigh fading. Thus, the channel between the $j$-th MU and its associated $i$-th VMNO is denoted by $h_{ij} = \frac{g_{ij}}{\sqrt{1 + {\left\| \mathbf{x}_{ij} \right\|}^\alpha}}$, where $\alpha$ denotes the path-loss decay factor  and $g_{ij}$ denotes the Rayleigh fading channel state information (CSI), i.e., $g_{ij}$ is a complex Gaussian random variable with zero mean and unit variance. The instantaneous data rate for the $j$-th MU in the $i$-th VMNO is given by
 \begin{align}
 	R_{ij} = W_{ij}\log_2\left(1 + \frac{P_{ij} \left|h_{ij} \right|^2 }{\Gamma W_{ij}N_0}\right)
 \end{align}
@@ -70,6 +70,7 @@ The two-stage spectrum leasing processes are operated in two timescales, namely 
 
 \section{Spectrum leasing and power allocation during the first stage}
 
+\subsection{Problem formulation}
 During the first stage, the CSI of each MU in each VMNO is a random variable. So, we first assume that the bandwidth and power allocated to all MUs in each VMNO are equal. Thus, the expected data rate of the $j$-th MU in the $i$-th VMNO is expressed as
 \begin{align}
 E\left({R}_{ij}\right) = \int_{0}^{\infty} \frac{W_i}{N_i} \log_2\left(1 + \frac{P_i x}{W_i N_0}\right) f_{\left|h_{ij} \right|^2} \left(x\right)dx
@@ -79,10 +80,10 @@ where $P_i$ denotes the total transmission power budget for the $i$-th VMNO, $f_
 During the first stage, we aim at minimizing the total transmit power at VMNOs under the QoS requirement at each MU in each VMNO and the total bandwidth constraint at the MNO by properly choosing the transmit power $P_i$ and the bandwidth $W_i$. Thus, the optimization problem is formulated as
 \begin{subequations}\label{q4}
 	\begin{align}
-	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W_{sum}\\ \quad &  E\left({R}_{ij}\right) \geq \bar{R}_i, \ P_i \geq 0, W_i \geq 0, \ \forall i, 
+	\min_{\mathbf{p}, \mathbf{w}}\ & \sum\limits_{i = 1}^{N} P_i \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W_{sum}\\ \quad &  E\left({R}_{ij}\right) \geq \bar{R}_i, \ P_i \geq 0, W_i \geq 0, \ \forall i, 
 	\end{align}
 \end{subequations}
-where $\bar{R}_i$ denotes the data rate threshold at the $i$-th VMNO  \footnote{Note that in this paper, we assume that the data rate thresholds at different MUs which associated with the same VMNO are equal due to the same distribution of different MUs in each VMNO.}. To proceed, we will first introduce the following proposition:
+where $\bar{R}_i$ denotes the data rate threshold at the $i$-th VMNO  \footnote{Note that in this paper, we assume that the data rate thresholds at different MUs which associated with the same VMNO are equal due to the same distribution of different MUs in each VMNO.}, $\mathbf{p} = \left[P_1, P_2, \cdots, P_N\right]^T$, $\mathbf{w} = \left[W_1, W_2, \cdots, W_N\right]^T$. To proceed, we will first introduce the following proposition:
 
 \textit{Proposition 1}: The cumulative distribution function (CDF) of $\left|h_{ij} \right|^2$ is $F_{\left|h_{ij} \right|^2}\left(x\right) = 1 - M\left(\frac{2}{\alpha}, 1 + \frac{2}{\alpha}, - x r_i^{\alpha}\right)e^{-x}$, where $M\left(a,b,z\right)$ denotes the Kummer's function \cite{MAbramowitz}.
 
@@ -104,7 +105,7 @@ g\left(x\right) =& \frac{2r_i^{\alpha}}{2+\alpha} M\left(1 + \frac{2}{\alpha}, 2
 Now, the original optimization problem \eqref{q4} can be reformulated as follows:
 \begin{subequations}\label{q7}
 	\begin{align}
-	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \label{q7a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W_{sum} \label{q7b} \\ \quad &  \int_{0}^{\infty} \frac{W_i}{N_i} \log_2\left(1 + \frac{P_i x}{W_i N_0}\right) e^{-x}g\left(x\right) dx \geq \bar{R}_i, \forall i \label{q7c}\\
+	\min_{\mathbf{p}, \mathbf{w}}\ & \sum\limits_{i = 1}^{N} P_i \label{q7a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W_{sum} \label{q7b} \\ \quad &  \int_{0}^{\infty} \frac{W_i}{N_i} \log_2\left(1 + \frac{P_i x}{W_i N_0}\right) e^{-x}g\left(x\right) dx \geq \bar{R}_i, \forall i \label{q7c}\\
 	& P_i \geq 0, W_i \geq 0, \ \forall i, \label{q7d}
 	\end{align}
 \end{subequations}
@@ -126,12 +127,87 @@ where $\left(e\right)$ follows from $x = t^2$, $\left(f\right)$ follows from \eq
 Finally, the spectrum leasing allocation optimization problem can be expressed as follows:
 \begin{subequations}\label{q10}
 	\begin{align}
-	\min_{P_i, W_i}\ & \sum\limits_{i = 1}^{N} P_i \label{q10a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W_{sum} \label{q10b} \\ \quad &  \sum\limits_{k = 1}^{K_i}b_{ki}\frac{W_i}{N_i}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right) \geq \bar{R}_i, \forall i \label{q10c}\\
+	\min_{\mathbf{p}, \mathbf{w}}\ & \sum\limits_{i = 1}^{N} P_i \label{q10a} \\ \mbox{s.t.} \quad &  \sum\limits_{i = 1}^{N} W_i \leq W_{sum} \label{q10b} \\ \quad &  \sum\limits_{k = 1}^{K_i}b_{ki}\frac{W_i}{N_i}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right) \geq \bar{R}_i, \forall i \label{q10c}\\
 	& P_i \geq 0, W_i \geq 0, \ \forall i. \label{q10d}
 	\end{align}
 \end{subequations}
-Since problem \eqref{q10} is convex in terms of optimization variables $P_i$ and $W_i$, it can be solved efficiently by existing optimization tools such as CVX \cite{SBoyd1}.
+Since problem \eqref{q10} is convex in terms of optimization variables $\mathbf{p}$ and $\mathbf{w}$, it can be solved efficiently by existing optimization tools such as CVX \cite{SBoyd1}. Next, we will exploit the structure of problem \eqref{q10} and obtain its global optimal solution via using a distributed algorithm named ADMM \cite{SBoyd2,EChen} to further reduce the complexity.
+\subsection{ADMM-based distributed algorithm for solving the optimization problem}
+First, we will introduce an auxiliary variable $\mathbf{z} = \left[Z_1, Z_2, \cdots, Z_N\right]^T$. Thus, optimization problem \eqref{q10} can be reformulated as
 
+\begin{subequations}\label{eq11}
+	\begin{align}
+	\min_{\mathbf{p}, \mathbf{w}, \mathbf{z}}\ & \sum\limits_{i = 1}^{N} P_i \label{eq11a} \\ \mbox{s.t.} \quad &  \mathbf{w} - \mathbf{z} = \mathbf{0} \label{eq11b} \\ \quad &  \sum\limits_{i = 1}^{N}Z_i \leq W_{sum} \label{eq11c} \\ \quad &  \sum\limits_{k = 1}^{K_i}b_{ki}\frac{W_i}{N_i}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right) \geq \bar{R}_i, \forall i \label{eq11d}\\
+	& P_i \geq 0, W_i \geq 0, Z_i \geq 0, \ \forall i. \label{eq11e}
+	\end{align}
+\end{subequations}
+
+Denote the feasible region of constraint \eqref{eq11c} and $Z_i \geq 0, \forall i$ as $\mathcal{C}$, its indicator function can be defined as
+\begin{equation}
+\mathbb{I}_\mathcal{C}\left(\mathbf{z}\right) = \left\{ \begin{array}{lcl}
+0, & &\mbox{if} \ \mathbf{z} \in \mathcal{C}, \\
++\infty, & &\mbox{otherwise}.
+\end{array}
+\right.
+\end{equation}
+Likewise, denote the feasible region of constraint \eqref{eq11d}, $P_i\geq 0$ and $W_i \geq 0, \forall i$ as $\mathcal{D}$, its indicator function can be defined as
+\begin{equation}
+\mathbb{I}_\mathcal{D}\left(\mathbf{p},\mathbf{w}\right) = \left\{ \begin{array}{lcl}
+0, & &\mbox{if} \ \left(\mathbf{p}, \mathbf{w}\right) \in \mathcal{D}, \\
++\infty, & &\mbox{otherwise}.
+\end{array}
+\right.
+\end{equation}
+Thus, problem \eqref{eq11} can be rewritten in ADMM form as follows:
+\begin{subequations}\label{eq14}
+	\begin{align}
+	\min_{\mathbf{p}, \mathbf{w}, \mathbf{z}}\ & \sum\limits_{i = 1}^{N} P_i + \mathbb{I}_\mathcal{C}\left(\mathbf{z}\right) + \mathbb{I}_\mathcal{D}\left(\mathbf{p},\mathbf{w}\right)  \label{eq14a} \\ \mbox{s.t.} \quad &  \mathbf{w} - \mathbf{z} = \mathbf{0} \label{eq14b}
+	\end{align}
+\end{subequations}
+Then, the augmented Lagrangian (using the scaled dual variable) of problem \eqref{eq14} is given by
+\begin{align}
+\mathcal{L}_\rho\left(\mathbf{p},\mathbf{w}, \mathbf{z},\mathbf{u}\right) = & \sum\limits_{i = 1}^{N} P_i + \mathbb{I}_\mathcal{C}\left(\mathbf{z}\right) + \mathbb{I}_\mathcal{D}\left(\mathbf{p},\mathbf{w}\right) + \\ & \frac{\rho}{2}\left\|\mathbf{w} - \mathbf{z} + \mathbf{u}\right\|_2^2
+\end{align}
+where $\rho > 0$ is the penalty parameter and $\mathbf{u} = [U_1, U_2, \cdots, U_N]^T$ is the dual variable for the  constraint \eqref{eq14b}. From problem \eqref{eq14}, it can be observed that the variables can be split into two blocks: $\{\mathbf{p}, \mathbf{w}\}$ and $\mathbf{z}$. Besides, the objective function is also separable across this splitting. Therefore, the ADMM technique can be applied to solve this problem by iteratively updating $\{\mathbf{p}, \mathbf{w}\}$, $\mathbf{z}$ and $\mathbf{u}$. Denote the values in the $k$-th iteration as $\{\mathbf{p}^k, \mathbf{w}^k, \mathbf{z}^k, \mathbf{u}^k\}$. Thus, in the $(k+1)$-th iteration, the variables can be updated sequentially as follows:
+ 
+1) step 1: Given $\{\mathbf{z}^k, \mathbf{u}^k\}$, we first maximize $\mathcal{L}_\rho$ with respect to $\{\mathbf{p}, \mathbf{w}\}$, where
+\begin{align}
+\{\mathbf{p}^{k+1}, \mathbf{w}^{k+1}\} = \arg \max_{\mathbf{p}, \mathbf{w}} \mathcal{L}_\rho\left(\mathbf{p}, \mathbf{w}, \mathbf{z}^k, \mathbf{u}^k\right) \label{q17}
+\end{align}
+Notice that the update of $\mathbf{p}$ and $\mathbf{w}$ in problem \eqref{q17} is equivalent to solving the following problem:
+\begin{subequations}\label{eq18}
+	\begin{align}
+	\min_{\mathbf{p}, \mathbf{w}}\ & \sum\limits_{i = 1}^{N} P_i + \frac{\rho}{2}\sum\limits_{i = 1}^{N}\left(W_i - Z_i^k + U_i^k \right)^2  \label{eq18a} \\ \mbox{s.t.} \quad &  \eqref{eq11d},  \label{eq18b} \\
+	& W_i\geq 0, P_i \geq 0, \forall i. \label{eq18c}
+	\end{align}
+\end{subequations}
+It is observed that problem \eqref{eq18} can be decomposed into $N$ subproblems, each subproblem solves:
+\begin{subequations}\label{eq19}
+	\begin{align}
+	\min_{P_i, W_i}\ & P_i + \frac{\rho}{2}\left(W_i - Z_i^k + U_i^k \right)^2  \label{eq19a} \\ \mbox{s.t.} \quad & \sum\limits_{k = 1}^{K_i}b_{ki}\frac{W_i}{N_i}\log_2\left(1 + \frac{P_it_{ki}^2}{W_iN_0}\right) \geq \bar{R}_i,  \label{eq19b} \\
+	& W_i\geq 0, P_i \geq 0. \label{eq19c}
+	\end{align}
+\end{subequations}
+Notice that each subproblem \eqref{eq19} is a convex problem and can be solved efficiently using interior point methods \cite{SBoyd3}.
+
+2) step 2: Given $\{\mathbf{p}^{k+1}, \mathbf{w}^{k+1}, \mathbf{u}^k\}$, we then maximize $\mathcal{L}_\rho$ with respect to $\mathbf{z}$, where
+\begin{align}
+\mathbf{z} = \arg \max_{\mathbf{z}} \mathcal{L}_\rho\left(\mathbf{p}^{k+1}, \mathbf{w}^{k+1}, \mathbf{z}, \mathbf{u}^k\right),
+\end{align} 
+which can be equivalently written as the following convex optimization problem: 
+\begin{subequations}\label{eq21}
+	\begin{align}
+	\min_{\mathbf{z}}\ & \left\|\mathbf{w}^{k+1} - \mathbf{z} + \mathbf{u}^k \right\|_2^2 \label{eq21a} \\ \mbox{s.t.} \quad & \left\|\mathbf{z} \right\|_1 \leq W_{sum},  \label{eq21b} \\
+	& Z_i\geq 0, \forall i. \label{eq21c}
+	\end{align}
+\end{subequations}
+The above convex problem \eqref{eq21} is the $l_1$ ball problem \cite{JDuchi} and we can obtain its closed-form solution as follows:
+
+(a) If $\left\|\mathbf{w}^{k+1} + \mathbf{u}^k \right\|_1 > W_{sum}$, $Z_i^{k+1}$ can be obtained as follows:
+\begin{align}
+Z_i^{k+1} = \max\left\{W_i^{k+1} + U_i^k - \beta, 0\right\}
+\end{align}
+where $\beta = \frac{1}{\zeta}\left(\sum\limits_{i = 1}^{\zeta} \mathbf{v} - W_{sum} \right)$, $\mathbf{v}$ denotes the vector obtained by sorting $\mathbf{w}^{k+1} + \mathbf{u}^k$ in a descending order
 \section{Dynamic spectrum allocation and power allocation during the second stage}
 During the second stage, each VMNO dynamically allocates the spectrum that has already been rent from MNO during the first stage to MUs in its serving region. The resource allocation can be performed during different time slots at the second stage and we only focus on a particular time slot. We further assume that perfect CSIs can be estimated by each VMNO at each time slot. Thus, the resource allocation optimization problem in the $i$-th VMNO can be formulated as
 \begin{subequations}\label{q11}
@@ -177,45 +253,55 @@ where $h_{\mbox{max}}$ and $h_{\mbox{min}}$ denote the maximum and minimum chann
 
 \textit{Proof}: See Appendix B.  $\hfill\blacksquare$
 \section{Simulation Results}
-In this section, we evaluate the performance of our proposed spectrum leasing and allocation policies through numerical results. We consider a multicell system consisting of six circular areas ($N = 6$) and each VMNO is located at the center of the cell. 
+In this section, we evaluate the performance of our proposed spectrum leasing and allocation policies through numerical results. 
+
+We consider a multicell system consisting of six circular areas ($N = 6$) and each VMNO is located at the center of the cell. The radii and the corresponding user densities of the six cells are configured as $(r_1 = 80\mbox{m}, \lambda_1 = 2400/\mbox{km}^2)$, $(r_2 = 80\mbox{m}, \lambda_2 = 1600/\mbox{km}^2)$, $(r_3 = 100\mbox{m}, \lambda_3 = 1600/\mbox{km}^2)$, $(r_4 = 100\mbox{m}, \lambda_4 = 2000/\mbox{km}^2)$, $(r_5 = 120\mbox{m}, \lambda_5 = 2000/\mbox{km}^2)$, and $(r_6 = 120\mbox{m}, \lambda_6 = 2400/\mbox{km}^2)$. Each VMNO and corresponding MUs are equipped with one antenna. MUs are randomly and uniformly distributed within each cell. All the channels from MUs to corresponding VMNO are assumed to be subjected to three components: path-loss, log-normal shadowing, and small-scale Rayleigh fading. The path-loss decay factor is 3.76, 
+path-loss at reference distance 1m is 15.3dB, the standard deviation for Shadowing is 8dB and Rayleigh small scale fading is 0dB. In all simulations, the total transmit power of each VMNO is computed by using 10000 randomly generated channel realizations. Noise spectral density of -174dBm/Hz and 10dBi antenna gain are considered. If not specified, the total bandwidth $W_{sum}$ is set to be 100MHz and the minimum rate requirements $R_{min}$ are set as $\bar{R}_i = \tilde{R}_i = R_{min} = 1\mbox{Mbps}, \forall i$.
 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=3.6in]{SR_convergence.eps}
-	\caption{Average achievable rate of the cell-edge user, $\zeta_e$, versus the achievable rate constraint from base station to central user, $\bar{\xi}_c$; performance comparisons of our proposed cooperative NOMA transmission scheme with CCCP-based algorithm and closed-form search based suboptimal algorithm, conventional NOMA and OMA schemes without cooperation where $P_b=30$ dBm and $P_c=20$ dBm.}
+	\caption{Spectrum ratio versus the number of iterations at six VMNOs when the total bandwidth is 100MHz, the minimum rate requirement is 1Mbps, and the path-loss decay factor is 3.76.}
 \end{figure}
+
+In Fig. 2, we present the spectrum ratio occupied by each VMNO for different iteration times when the total bandwidth is 100MHz and the minimum rate requirement is 1Mbps, where spectrum ratio is defined as the ratio of the bandwidth occupied by the VMNO to the total bandwidth.  It is found from Fig. 2 that after only 6$\sim$8 iterations, the steady spectrum ratio is achieved. It is also found that both radius and user density in the VMNO have significant effects on the spectrum ratio. The larger the radius of the cell is configured, the more bandwidth is needed. Likewise, the larger the user density of the cell is configured, the more bandwidth is needed. 
+
+
 
 \begin{figure}
 	\centering
 	\includegraphics[width=3.6in]{P_alpha.eps}
-	\caption{.}
+	\caption{Total transmit power $P_{sum}$ at the six VMNOs versus the path-loss decay factor $\alpha$; performance comparison of different schemes when the total bandwidth is 100MHz and the minimum rate requirement $R_{min}$ is 1Mbps.}
 \end{figure}
-
+In Fig. 3, we present the total transmit power $P_{sum}$ comparison of different schemes for different path-loss decay factors $\alpha$ when the total bandwidth is 100MHz and the minimum rate requirement $R_{min}$ is 1Mbps. Note that $P_{sum}$ is defined as the total transmit power at the six VMNOs during the second stage. In the legend, ``Proposed" denotes our proposed scheme where spectrum and power allocation factors are optimized during two stages. ``DRA" denotes the dynamic resource allocation where the spectrum and power allocation factors are only optimized during the second stage and the spectrum is equally allocated during the first stage. ``Reservation" denotes that the spectrum and power allocation factors are only optimized during the first stage and the spectrum is equally allocated during the second stage. ``Benchmark" denotes the scheme that the spectrum is equally allocated both during the first stage and the second stage. It is observed that when the path-loss decay factor $\alpha$ increases, the total transmit power $P_{sum}$ substantially increases for all the schemes. Moreover, our proposed scheme is observed to achieve notably smaller total transmit power than the others schemes, which demonstrates the effectiveness of our proposed spectrum leasing and power allocation scheme.
 \begin{figure}
 	\centering
 	\includegraphics[width=3.6in]{P_rmin.eps}
-	\caption{.}
+	\caption{Total transmit power $P_{sum}$ at the six VMNOs versus the minimum rate requirement at MUs; performance comparison of different schemes when the total bandwidth is 100MHz and the path-loss decay factor is 3.76.}
 \end{figure}
+
+In Fig. 4, we present the total transmit power $P_{sum}$ comparison of different schemes for different minimum rate requirements $R_{min}$ when the total bandwidth is 100MHz and the path-loss decay factor is 3.76. Here, we assume that $\bar{R}_i = \tilde{R}_i= R_{min}, \forall i$. From Fig. 4, it is observed that as the minimum rate requirement constraint $R_{min}$ becomes more stringent, substantially more total transmit power $P_{sum}$ is needed at the six VMNOs. In particular, the performance gap between our proposed scheme and the other schemes becomes larger when the minimum rate requirements $R_{min}$ increases.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=3.6in]{P_wsum.eps}
-	\caption{.}
+	\caption{Total transmit power $P_{sum}$ at the six VMNOs versus the total bandwidth $W_{sum}$; performance comparison of different schemes when the minimum rate requirement is 1Mbps and the path-loss decay factor is 3.76.}
 \end{figure}
 
+In Fig. 5, we present the total transmit power $P_{sum}$ comparison of different schemes for different total bandwidth $W_{sum}$ when the minimum rate requirement is 1Mbps and the path-loss decay factor is 3.76. From Fig. 5, it is observed that as the total bandwidth $W_{sum}$ increases, the total transmit power $P_{sum}$ substantially decreases for all schemes. It is also found that our proposed scheme outperforms the other schemes.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=3.6in]{SR_rmin.eps}
-	\caption{.}
+	\caption{Spectrum ratio versus the minimum rate requirements at six VMNOs when the total bandwidth is 100MHz and the path-loss decay factor is 3.76.}
 \end{figure}
 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=3.6in]{SR_wsum.eps}
-	\caption{.}
+	\caption{Spectrum ratio versus the total bandwidth at six VMNOs when the minimum rate requirement is 1Mbps and the path-loss decay factor is 3.76.}
 \end{figure}
 
 \section{Conclusion}
@@ -312,6 +398,17 @@ The proof is completed.
 \bibitem{NMSteen}N. M. Steen, G. D. Byrne, and E. M. Gelbard, ``Gaussian quadratures for the integrals $\int_{0}^{\infty} e^{-x^2}f\left(x\right) dx$ and $\int_{0}^{b}e^{-x^2}f\left(x\right)dx$," \emph{ Math. Comput.}, vol. 23, no. 107, pp. 661-671, 1969.
 
 \bibitem{SBoyd1}M. Grant and S. Boyd, \emph{CVX: MATLAB Software for Disciplined Convex Programming.} Version 2.1, 2016, available: http://cvxr.com/cvx.
+
+\bibitem{SBoyd2}S. Boyd, N. Parikh, E. Chu, B. Peleato, and J. Eckstein, ``Distributed optimization and statistical learning via the alternating direction method of multipliers," \emph{Found. Trends in Mach. Learn.}, vol. 3, no. 1, pp. 1–122, Jan. 2011.
+
+\bibitem{EChen}E. Chen and M. Tao, ``ADMM-based fast algorithm for multi-group multicast beamforming in large-scale wireless systems," \emph{IEEE Trans. Commun.}, vol. 65, no. 6, pp. 2685–2698, Jun. 2017.
+
+\bibitem{SBoyd3}S. Boyd and L. Vandenberghe, Convex Optimization. Cambridge, U.K.: Cambridge Univ. Press, 2004.
+
+\bibitem{JDuchi}J. Duchi, S.Shalev-Shwartz, Y. Singer, and
+T. Chandra, ``Efficient projections onto
+the $l_1$-ball for learning in high dimensions," in \emph{Proc. 25th Int. Conf}. Mach. Learn., 2008,
+DOI: 10.1145/1390156.1390191.
 
 \bibitem{RMCorless}R. M. Corless, G. H. Gonnet, D. E. G. Hare, D. J. Jeffrey, and D. E.
 Knuth, ``On the Lambert W function," \emph{Adv. Comput. Math.}, vol. 5, pp. 329-359, 1996.
