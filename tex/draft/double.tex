@@ -5,7 +5,7 @@
 \usepackage{subfigure}
 \usepackage[final]{graphicx}
 \usepackage{graphics,picture}
-\usepackage{algorithm}
+\usepackage[boxed,noline]{algorithm2e}
 \usepackage{algorithmic}
 \usepackage{mathrsfs}
 \usepackage{cases}
@@ -14,7 +14,6 @@
 \renewcommand{\thefootnote}{\arabic{footnote}}
 \newcommand{\trace}{\mathop{\mathrm{Tr}}}%\trace
 \newcommand{\vectorize}{\mathop{\mathrm{vec}}}%\vectorization
-
 \begin{document}
 	
 \title{Joint Spectrum Leasing and Power Allocation Optimization of Virtual Mobile Network}
@@ -68,10 +67,9 @@ non-ideal coding and modulation in practice \cite{JGDForney}. $n_0$ denotes the 
                   
 \begin{figure}
 	\centering
-	\includegraphics[width=3.6in]{Pic1.eps}
+	\includegraphics[width=3.6in]{Pic}
 	\caption{Two-stage spectrum leasing network. During the first stage, MVNOs rent spectrum from an MNO based on the arrival rate and QoS of MUs. During the second stage, each MVNO allocates the obtained spectrum dynamically to a set of MUs.}
 \end{figure}
-
 The two-stage spectrum leasing processes are operated in two timescales, namely a period and a time slot. As shown in Fig. 1, the first stage is operated in a period and often measured in hours, where each MVNO rents wireless spectrum from a MNO. The second stage is operated in a time slot and often measured in milliseconds, during which the  wireless channel fading remains constant but may change from one time slot to anther. Notice that MVNOs will not release the occupied spectrum until the end of the whole transmission. We will discuss these two stages in the following two sections.
 
 \section{Spectrum leasing and power allocation during the first stage}
@@ -240,6 +238,37 @@ by updating the dual variable $\mathbf{u}$ as
 		\STATE \textbf{Until:} convergence.
 	\end{algorithmic}
 \end{algorithm}
+
+	\SetAlCapSkip{1em}
+\begin{algorithm}[h]
+
+	 \textbf{initialize:} 
+	Set $z_i^0 = 0$ and $u_i^0 = 0$, $\forall i$ on blockchain, $k = 0$.\\
+	\Repeat{convergence}{
+	 $P_i$: \textit{Optimization for each MVNO, compute locally} \\
+	 \Indp
+
+		 Get $ z_i^k$ and $ u_i^k $ from blockchain;\\
+		 Update $ w_i^{k+1}$ and $ p_i^{k+1} $ by solving \eqref{eq18};\\
+		 Send $ w_i^{k+1} $ to smart contract $ S_0 $;\\
+
+	 \Indm
+	 $S_0$: \textit{ADMM aggregator, compute on blockchain}\\
+	\Indp
+		 Update $ \mathbf{z}^{k+1} $ with closed-form expression \eqref{q21};\\
+		  Update the dual variable $\mathbf{u}^{k+1}$ using \eqref{q24};\\
+	\Indm
+		$k:=k+1$;\\
+}
+	 $S_1$: \textit{Spectrum charging contract, on blockchain}\\
+	\Indp
+		 Get final allocation scheme $  \mathbf{z}^{k} $ from blockchain;\\
+		  Each MVNO pays for their allocated spectrum $ z_i^k $ .\\
+	\Indm
+
+\caption{Blockchain based distributed spectrum management scheme}
+\end{algorithm}
+
 
 \section{Dynamic spectrum allocation and power allocation during the second stage}
 During the second stage, each MVNO dynamically allocates the spectrum that has already been rent from MNO during the first stage to MUs in its serving region. The resource allocation can be performed during different time slots at the second stage and we only focus on a particular time slot. We further assume that perfect CSIs can be estimated by each MVNO at each time slot. Thus, the resource allocation optimization problem in the $i$-th MVNO can be formulated as
@@ -445,7 +474,8 @@ Challenges and opportunities," \emph{IT Prof.}, vol. 19, no. 1, pp. 12-20, Jan./
 for virtualizing wireless resources in cellular networks," \emph{IEEE/ACM Trans. Netw.}, vol. 20, no. 5, pp. 1333–1346, Oct. 2012
 
 \bibitem{LZhao}L. Zhao, M. Li, Y. Zaki, A. Timm-Giel and C. Gorg, ``LTE virtualization:
-From theoretical gain to practical solution," \emph{in Proc. International Teletraffic Congress (ITC)}, pp. 71–78, Sep. 2011.
+From theoretical gain to practical solution," \emph{in Proc. International Teletraffic Congress (ITC)}, pp. 71–78, Sep. 2011.
+
 
 \bibitem{3GPP}3GPP TR 22.852, ``Study on Radio Access Network (RAN) sharing enhancements," Jun. 2013.
 
