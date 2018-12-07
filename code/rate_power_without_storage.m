@@ -179,7 +179,7 @@ ylabel('Spectrum ratio');
         xlabel('W_{sum}(MHz)')
 % xlabel('\alpha')
 for i = 1:K
-    plot(xt,W_all(:,i),['-k',markers(i)]);
+    plot(xt, Wmax_all(i)*W_all(:,i),['-k',markers(i)]);
 end
 legend(l_c)
 set(gca,'box','on')
