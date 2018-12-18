@@ -8,7 +8,7 @@
 \usepackage[boxed,noline]{algorithm2e}
 \usepackage{mathrsfs}
 \usepackage{cases}
-\usepackage{bm, comment,color,amssymb}
+\usepackage{bm, comment,color,amssymb,framed}
 \usepackage{cite,epstopdf}
 \renewcommand{\thefootnote}{\arabic{footnote}}
 \newcommand{\trace}{\mathop{\mathrm{Tr}}}%\trace
@@ -66,7 +66,7 @@ Consider a wireless communication system with one MNO and $N$ MVNOs. With wirele
 \end{align}
 where the total bandwidth owned by MNO is $W_{sum}$ Hertz (Hz). In this paper, without loss of generality, we approximate the $i$-th transmission cell as a fixed circular region $\mathcal{D}(\mathbf{o}_i, r_i) \in \mathbb{R}^2$, where $r_i$ denotes the cell radius and $\mathbf{o}_i$ denotes the cell center. The $i$-th MVNO is located at the origin $\mathbf{o}_i$. The locations of MUs are modeled as a realization of a Poisson point process (PPP) with intensity $\lambda_i$ in the $i$-th cell. The locations of MUs associated with the $i$-th MVNO are denoted as $\mathcal{X}_i = \{\mathbf{x}_{ij} \in \mathbb{R}^2 | j = 1, \cdots, N_i\}$, where $N_i = \pi r_i^2 \lambda_i$ is the expected number of MUs in the $i$-th cell. Note that the user set $\mathcal{X}_i$ changes with arrivals, departure, and movements of MUs.
 
-Suppose that transmitted signals are affected by both large-scale path loss and fast Rayleigh fading. Thus, the channel between the $j$-th MU and its associated $i$-th MVNO is denoted by $h_{ij} = \frac{g_{ij}}{\sqrt{1 + {\left\| \mathbf{x}_{ij} - \mathbf{o}_i \right\|}^\alpha}}$, where $\alpha$ denotes the path-loss decay factor  and $g_{ij}$ denotes the Rayleigh fading channel state information (CSI), i.e., $g_{ij}$ is a complex Gaussian random variable with zero mean and unit variance. The instantaneous data rate for the $j$-th MU in the $i$-th MVNO is given by
+Suppose that transmitted signals are affected by both large-scale path loss and fast Rayleigh fading. Thus, the channel between the $j$-th MU and its associated $i$-th MVNO is denoted by $h_{ij} = \frac{C g_{ij}}{\sqrt{1 + {\left\| \mathbf{x}_{ij} - \mathbf{o}_i \right\|}^\alpha}}$, where $\alpha$ denotes the path-loss decay factor  and $g_{ij}$ denotes the Rayleigh fading channel state information (CSI), i.e., $g_{ij}$ is a complex Gaussian random variable with zero mean and unit variance. The instantaneous data rate for the $j$-th MU in the $i$-th MVNO is given by
 \begin{align}
 	R_{ij} = b_{ij}\log_2\left(1 + \frac{q_{ij} \left|h_{ij} \right|^2 }{\Gamma b_{ij}\sigma_0}\right),
 \end{align}
@@ -75,7 +75,7 @@ non-ideal coding and modulation in practice \cite{JGDForney}. We assume that the
 \begin{figure}
 	\centering
 	\includegraphics[width=3.6in]{Pic.eps}
-	\caption{Two-stage spectrum leasing network. During the first stage, MVNOs rent spectrum from an MNO based on the arrival rate and QoS of MUs. During the second stage, each MVNO allocates the obtained spectrum dynamically to a set of MUs.}
+	\caption{Two-stage spectrum leasing network. During the first stage, MVNOs rent spectrum from an MNO based on the arrival rate and QoS of MUs. During the second stage, each MVNO allocates the obtained spectrum dynamically to a set of MUs. }
 \end{figure}
 
 The two-stage spectrum leasing processes are operated in two timescales, namely a period and a time slot. As shown in Fig. 1, the first stage is operated in a period and often measured in hours, where each MVNO rents wireless spectrum from a MNO. The second stage is operated in multiple time slots and often measured in milliseconds. Each period has multiple time slots. Wireless channel fading remains constant in a time slot but may change from one time slot to another. Notice that MVNOs will not release the occupied spectrum until the end of the whole period. We will discuss these two stages in the following two sections.
@@ -83,11 +83,31 @@ The two-stage spectrum leasing processes are operated in two timescales, namely 
 \section{Spectrum leasing and power allocation during the first stage}
 
 \subsection{Problem formulation}
-During the first stage, the CSI of each MU in each MVNO is a random variable. So, we first assume that the bandwidth and power allocated to all MUs at each MVNO are equal, namely, $b_{ij} = \frac{w_i}{N_i}$ and $q_{ij} = \frac{p_i}{N_i}, \forall i$. Thus, the expected data transmission rate of the $j$-th MU in the $i$-th cell is expressed as
+\begin{framed}
+	During the first stage, the CSI of each MU in each MVNO is a random variable. So, we first assume that the bandwidth and power allocated to all MUs at each MVNO are equal, namely, $b_{ij} = \frac{w_i}{N_i}$ and $q_{ij} = \frac{p_i}{N_i}, \forall i$. Thus, the expected data transmission rate of the $j$-th MU in the $i$-th cell is expressed as
+	\begin{align}
+	E\left({R}_{ij}\right) = \int_{0}^{\infty} \frac{w_i}{N_i} \log_2\left(1 + \frac{p_i x}{w_i n_0}\right) f_{\left|h_{ij} \right|^2} \left(x\right)dx
+	\end{align}
+	where $p_i$ denotes the total transmission power budget at the $i$-th MVNO, $f_{\left|h_{ij} \right|^2} \left(x\right)$ is the probability density function (PDF) of the random variable $\left|h_{ij} \right|^2$, $n_0 = \Gamma \sigma_0$. 
+\end{framed}
+{\color{red}{Please change the text in the box above as follows:}}
+\begin{framed}
+{ \color{blue}{During the first stage, the CSI of each MU in each MVNO is a random variable. So, we first assume that the bandwidth and power allocated to all MUs at each MVNO are equal, namely, $b_{ij} = \frac{w_i}{N_i}$ and $q_{ij} = \frac{p_i}{N_i}, \forall i$.} The actual number of MUs in the $i$-th cell during one time slot follows Poisson distribution with event rate $N_i$, i.e., $n_i \sim \mbox{Pois}\left(N_i\right)$. Consequently, the probability density function (PDF) of $n_i$ is 
 \begin{align}
-E\left({R}_{ij}\right) = \int_{0}^{\infty} \frac{w_i}{N_i} \log_2\left(1 + \frac{p_i x}{w_i n_0}\right) f_{\left|h_{ij} \right|^2} \left(x\right)dx
+f_{n_i}\left(k\right) = \mbox{Prob}\left(n_i = k\right) = \frac{e^{-N_i}N_i^k}{k!}, \quad k \in \mathbb{Z}^+,
 \end{align}
-where $p_i$ denotes the total transmission power budget at the $i$-th MVNO, $f_{\left|h_{ij} \right|^2} \left(x\right)$ is the probability density function (PDF) of the random variable $\left|h_{ij} \right|^2$, $n_0 = \Gamma \sigma_0$. 
+where $\mathbb{Z}^+$ denotes the set of nonnegative integers. Thus, the expected data transmission rate of the $j$-th MU in the $i$-th cell is expressed as
+\begin{align}
+& E\left(R_{ij}\right) \nonumber \\& = \sum\limits_{k = 1}^{\infty} \int_{0}^{\infty} \frac{w_i}{k}\log_2\left(1 + \frac{p_i x}{w_i n_0}\right)f_{\left|h_{i,j}\right|^2}\left(x\right)dx f_{n_i}\left(k\right) \nonumber \\
+& = s\left(N_i\right)\int_{0}^{\infty} w_i\log_2\left(1 + \frac{p_i x}{w_i n_0} \right)f_{\left|h_{i,j}\right|^2}\left(x\right)dx
+\end{align}
+where $s\left(N_i\right) = \sum\limits_{k = 1}^{\infty} \frac{1}{k}f_{n_i}\left(k\right) = e^{-N_i}\sum\limits_{k = 1}^{\infty}\frac{N_i^k}{kk!}$. According to \cite{MAbramowitz}, $s\left(N_i\right)$ can be further written as
+\begin{align}
+s\left(N_i\right) = e^{-N_i}\left(Ei\left(N_i\right) - \ln\left(N_i\right) - \gamma_{EM}\right)
+\end{align}
+where $Ei\left(\cdot\right)$ is the exponential integral function and its series expansion is $Ei\left(x\right) = \gamma_{EM} + \ln x + \sum\limits_{n = 1}^{\infty}\frac{x^n}{nn!}$ \cite[5.1.10]{MAbramowitz}. $\gamma_{EM}$ denotes the Euler-Mascheroni constant.
+}
+\end{framed}
 
 During the first stage, we aim at minimizing the total transmit power at all MVNOs under the QoS requirement at each MU in each MVNO and the total bandwidth constraint at the MNO by properly choosing the transmit power $p_i$ and the bandwidth $w_i$. Thus, the optimization problem is formulated as
 \begin{subequations}\label{q4}
@@ -468,7 +488,8 @@ Challenges and opportunities," \emph{IT Prof.}, vol. 19, no. 1, pp. 12-20, Jan./
 \bibitem{CLiang} C. Liang and F. R. Yu, ``Wireless network virtualization: A survey, some research issues and challenges,” \emph{IEEE Comm. Surveys Tutorials}, vol. 17, pp. 358-380, Firstquarter 2015.
 
 \bibitem{LZhao}L. Zhao, M. Li, Y. Zaki, A. Timm-Giel and C. Gorg, ``LTE virtualization:
-From theoretical gain to practical solution," \emph{in Proc. International Teletraffic Congress (ITC)}, pp. 71-78, Sep. 2011.
+From theoretical gain to practical solution," \emph{in Proc. International Teletraffic Congress (ITC)}, pp. 71-78, Sep. 2011.
+
 
 \bibitem{3GPP}3GPP TR 22.852, ``Study on Radio Access Network (RAN) sharing enhancements," Jun. 2013.
 
