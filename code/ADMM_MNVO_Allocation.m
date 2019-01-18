@@ -1,9 +1,9 @@
 function varargout = ADMM_MNVO_Allocation(x0,R_all,N_all,alpha, noise_power, Rmin, Wmax)
 %% initialization
 K=0.5*length(x0);
-MAX_ITER = 2e2;
-ABSTOL   = 1e-5;
-RELTOL   = 1e-3;
+MAX_ITER = 1e2;
+ABSTOL   = 1e-6;
+RELTOL   = 1e-4;
 rho = 1;
 tau = 2;
 t = 1000;
@@ -20,7 +20,7 @@ for k = 1:MAX_ITER
     parfor i = 1: K
         WP=fmincon(@(x) x(2)/rho+1/2*norm(x(1)-Z(i)+miu(i))^2,[W(i);P(i)],[],[]...
             ,[],[],[0;0],[1;+Inf],...
-            @(x) myfun2(x(1),x(2),R_all(i),N_all(i),alpha, noise_power, Rmin, Wmax),options);
+            @(x) myfun2(x(1),x(2),R_all(i),N_all(i),alpha, noise_power, Rmin(i), Wmax),options);
         W_new(i) = WP(1);
         P_new(i) = WP(2);        
     end
