@@ -1,0 +1,494 @@
+\documentclass[12pt,draftcls, onecolumn]{IEEEtran}
+\usepackage{times,amsmath,color,amssymb,graphicx,epsfig,cite,geometry,psfrag}%,subfigure}%
+\geometry{letterpaper,top=0.85in,bottom=0.85in,left=0.85in,right=0.85in}
+%\usepackage[german]{babel}
+\usepackage{cases,hyperref,enumerate,comment}
+
+\newcommand{\mf}{\mathbf}
+\begin{document}
+\title{Responses for the Reviewers' Comments}
+\maketitle \vspace{-15mm}
+
+% -----------------------------------------------------------------------------
+
+\textbf{\textcolor[rgb]{0.00,0.00,1.00}{\emph{The authors would like
+to thank the editor and the reviewers for having spent precious time
+to review the paper and giving valuable comments. We have carefully
+considered all of your comments and have made necessary
+modifications in our revised manuscript. We believe that the quality
+of the paper has been improved, thank you for your effort and
+contribution. The reviewers' comments and our respective responses
+are listed below.}}}
+
+% -----------------------------------------------------------------------------
+%\begin{comment}
+\vspace{5mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{EDITOR}}
+
+\vspace{3mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+The major concern is that it's not well justified why Blockchain is the right technology for the proposed dynamic spectrum acquisition given the slow speed of PoW, small number of MVNOs, and potential security vulnerabilities. Furthermore, the proposed method is not compared with conventional ones. So its advantage is not clearly demonstrated.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the Editor for the valuable comments. In the $5^{th}$-$10^{th}$ paragraphs in Section I and in the $2^{nd}$-$8^{th}$ sentences of the $1^{st}$ paragraph in Section II in the revised manuscript, we have properly addressed the Editor's comments.
+
+Furthermore, in the last paragraph in Section VI in the revised manuscript, we have specified the advantages of our proposed method compared to conventional ones:
+
+\begin{quote}
+\underline{The $5^{th}$-$10^{th}$ paragraphs in Section I:}
+\vspace{0mm}\newline{\hspace{3in}``{
+\color{red}
+In the Bitcoin system, users are only allowed to perform a set of given operations. Due to non-Turing-completeness, this system cannot handle more complex business logic. In order to solve this problem, Ethereum was proposed by Vitalik Buterin in 2013 [21]. Ethereum is a Turing-complete system where users can develop programs to run on the Ethereum virtual machine using high-level programming languages. These programs, also called as smart contracts [22], will run on all participants automatically and transparently with pre-coded logic once deployed. Final consistency and correctness can be ensured by the consensus mechanism when the reliable nodes are the majority in the network [21].
+
+\hspace{0.15in} Both Bitcoin and Ethereum belong to public blockchains [23]. Public blockchains, sometimes referred to as permission-less blockchains, are totally decentralized blockchains that open to everyone in the world. Everyone can take participant in the public blockchains from everywhere at any time without registration and authentication. Everyone has right to operate the blockchains, such as sending and verifying new transactions as well as reading and saving past verified transactions.
+
+\hspace{0.15in} In public blockchains, the consensus is built between all participants with  Nakamoto-type incentive mechanism, such as PoW and proof of stake [24] protocol. In order to stimulate nodes to help maintain the blockchains instead of attacking and subverting, cryptocurrency is awarded to the consensus participants according to their computational efforts. Due to a large number of participants, achieving consensus in public blockchains is time-consuming and power-demanding which restricts the application of blockchains in many scenarios.
+
+\hspace{0.15in} Apart from public blockchains, another primary type of blockchains is permissioned blockchains [25]. Permissioned blockchains are also called as private blockchains or consortium blockchains when they are managed by one or more predefined participants, respectively. In permissioned blockchains,  permissions to join and operate the blockchains are strictly controlled by predefined participants. Predefined participants are responsible for creating consensus in permissioned blockchains.
+
+\hspace{0.15in} Due to the limited number of predefined participants and controllable trust among them, more efficient electing and voting based low complexity consensus algorithm can be employed. For example,  practical Byzantine fault tolerance (PBFT) [26] based three rounds double-check protocol is adopted by HyperLedger Fabric v0.5 [27]. Both Raft [28] and PBFT-inspired consensus algorithms are employed by Quorum [29] and R3 Corda [30]. Compared with the throughput of dozens of transactions per second (TPS) in public blockchains, private blockchains can handle approximately thousands of TPS [31] which can meet the demand in most application scenarios.
+
+\hspace{0.15in} To accelerate the computation and guarantee the security during dynamic spectrum acquisition, we assume that the consensus algorithm is performed on permissioned blockchains throughout the paper.}"}
+\end{quote}
+
+\begin{quote}
+\underline{The $1^{st}$ paragraph in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``Consider a wireless downlink communication system with $M$ MVNOs. {\color{red}
+It is assumed that most of MVNOs are reliable. They are predefined participants of a permissioned  MVNO-based blockchain regulated by the MNO. Smart contract can be deployed on the permissioned blockchain to help the MNO manage the network. MNO permits reliable MVNOs to join the blockchain and kicks out those have malicious intentions. MNO also charges the MVNOs and authorizes them to use the spectrum with the help of smart contracts. All MVNOs have permissions to operate the blockchain. The consensus is built by all MVNOs via the low complexity consensus algorithm, e.g., PBFT and Raft.} Each MVNO serves the MUs in a cell. The $m$-th transmission cell, $m\in\mathcal{M}=\{1,2,\cdots,M\}$, is assumed to be a fixed circular region, denoted as  $\mathcal{D}_m\in \mathbb{R}^2$, whose radius is denoted as $r_m$. The $m$-th MVNO is located at the cell center."}
+\end{quote}
+
+\begin{quote}
+\underline{The last paragraph in Section VI:}
+\vspace{0mm}\newline{\hspace{3in}``{\color{red}It is noted that compared to other conventional methods, using permissioned blockchains achieves the following advantages at the expense of extra computation and storage costs in each MVNO:
+\begin{itemize}
+\item By delegating all the computation and data operation tasks to the blockchain and MVNOs, lots of management costs can be saved at the MNO.
+\item Spectrum acquisition, billing and authorization can be performed automatically with the help of smart contracts deployed on the blockchain. The processing delay decreases significantly, making real-time dynamic spectrum access possible.
+\item Due to the transparency of the blockchain, the MVNOs can be ensured that they are charged fairly.
+\item During the spectrum acquisition process, MUs related data doesn't need to be exchanged in the network. Therefore, MUs' privacy can be protected.
+\item Permissioned blockchains are more robust to cyberattack. The network is safe and reliable unless most of the MVNOs have been controlled by the attacker.
+\end{itemize}
+}"}
+\end{quote}
+
+ 
+\newpage
+%\end{comment}
+
+
+\vspace{5mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{REVIEWER
+1}}
+
+\vspace{3mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+The paper by Jiang et al. provides a report on usage of a decentralized blockchain based dynamic spectrum method. The authors aims to minimize the sum transmit power at all multiple mobile virtual network operators while satisfying the average data transmission rate thresholds. I believe the two key results are as follows: 1. The authors theoretically derive the semi-closed-form solution to the actual required sum transmit power minimization problem subject to data transmission rate constraints. 2. The authors' scheme achieves almost the same minimum sum power as the non-causal scheme which assumes the number of active MUs in all cells and all the channels are known non-causally for the optimal dynamic spectrum allocation.
+
+The paper is timely, well written, and of interest to readers in a variety of disciplines. I recommend publication of the manuscript provided the authors can address the following comments. Some of the comments are major issues regarding the set up and practicality of the proposed methods.
+
+1. The authors suggest using blockchain for their data computation. In general blockchain is a distributed data base and it is not used for that purpose. They need to justify their proposal. They provided a mathematical derivation for the feasibility of the blockchain usage but not for it's purpose. Also blockchain is computationally expensive. They are also really power demanding. Authors need to address these issues for their scheme when they want to compare it to the current methods. This may change their findings completely.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $5^{th}$-$10^{th}$ paragraphs in Section I and in the $2^{nd}$-$8^{th}$ sentences of the $1^{st}$ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The $5^{th}$-$10^{th}$ paragraphs in Section I:}
+\vspace{0mm}\newline{\hspace{3in}``{
+\color{red}
+In the Bitcoin system, users are only allowed to perform a set of given operations. Due to non-Turing-completeness, this system cannot handle more complex business logic. In order to solve this problem, Ethereum was proposed by Vitalik Buterin in 2013 [21]. Ethereum is a Turing-complete system where users can develop programs to run on the Ethereum virtual machine using high-level programming languages. These programs, also called as smart contracts [22], will run on all participants automatically and transparently with pre-coded logic once deployed. Final consistency and correctness can be ensured by the consensus mechanism when the reliable nodes are the majority in the network [21].
+
+\hspace{0.15in} Both Bitcoin and Ethereum belong to public blockchains [23]. Public blockchains, sometimes referred to as permission-less blockchains, are totally decentralized blockchains that open to everyone in the world. Everyone can take participant in the public blockchains from everywhere at any time without registration and authentication. Everyone has right to operate the blockchains, such as sending and verifying new transactions as well as reading and saving past verified transactions.
+
+\hspace{0.15in} In public blockchains, the consensus is built between all participants with  Nakamoto-type incentive mechanism, such as PoW and proof of stake [24] protocol. In order to stimulate nodes to help maintain the blockchains instead of attacking and subverting, cryptocurrency is awarded to the consensus participants according to their computational efforts. Due to a large number of participants, achieving consensus in public blockchains is time-consuming and power-demanding which restricts the application of blockchains in many scenarios.
+
+\hspace{0.15in} Apart from public blockchains, another primary type of blockchains is permissioned blockchains [25]. Permissioned blockchains are also called as private blockchains or consortium blockchains when they are managed by one or more predefined participants, respectively. In permissioned blockchains,  permissions to join and operate the blockchains are strictly controlled by predefined participants. Predefined participants are responsible for creating consensus in permissioned blockchains.
+
+\hspace{0.15in} Due to the limited number of predefined participants and controllable trust among them, more efficient electing and voting based low complexity consensus algorithm can be employed. For example,  practical Byzantine fault tolerance (PBFT) [26] based three rounds double-check protocol is adopted by HyperLedger Fabric v0.5 [27]. Both Raft [28] and PBFT-inspired consensus algorithms are employed by Quorum [29] and R3 Corda [30]. Compared with the throughput of dozens of transactions per second (TPS) in public blockchains, private blockchains can handle approximately thousands of TPS [31] which can meet the demand in most application scenarios.
+
+\hspace{0.15in} To accelerate the computation and guarantee the security during dynamic spectrum acquisition, we assume that the consensus algorithm is performed on permissioned blockchains throughout the paper.}"}
+\end{quote}
+
+\begin{quote}
+\underline{The $1^{st}$ paragraph in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``Consider a wireless downlink communication system with $M$ MVNOs. {\color{red}
+It is assumed that most of MVNOs are reliable. They are predefined participants of a permissioned  MVNO-based blockchain regulated by the MNO. Smart contract can be deployed on the permissioned blockchain to help the MNO manage the network. MNO permits reliable MVNOs to join the blockchain and kicks out those have malicious intentions. MNO also charges the MVNOs and authorizes them to use the spectrum with the help of smart contracts. All MVNOs have permissions to operate the blockchain. The consensus is built by all MVNOs via the low complexity consensus algorithm, e.g., PBFT and Raft.} Each MVNO serves the MUs in a cell. The $m$-th transmission cell, $m\in\mathcal{M}=\{1,2,\cdots,M\}$, is assumed to be a fixed circular region, denoted as  $\mathcal{D}_m\in \mathbb{R}^2$, whose radius is denoted as $r_m$. The $m$-th MVNO is located at the cell center."}
+\end{quote}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+2. In the system model, authors mentioned the MVNOs should predict the required spectrum to provide. This is in general a hard problem. There are many papers addressing this topic and many start up companies started their business based on this. This needs to be addressed. It is not also clear the suggestion of Poisson point process is for spectrum availability or demand and what is the motivation for this.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $3^{rd}$ paragraph of Section II in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The $3^{rd}$ paragraph in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``{\color{red} To predict the required wireless spectrum accurately in a period is a hard problem in general [32], [33]. To make it easy to tackle, we assume that all MUs arrive at the service cells with a spatio-temporal Poisson process, the movement of each MU can be modeled as independent Markov process and the sojourn time of each MU before its departure follows an independent exponential distribution. Based on the above assumption, the number of active MUs in a service cell describes a spatial birth-and-death process, whose stationary distribution is a Poisson point process (PPP) [34], [35]. Thus, the number of active MUs in the $m$-th cell is modeled as a PPP with density $\lambda_m$. This is a very common assumption in wireless network modeling and performance analysis [36], [37].}"}
+\end{quote}
+
+\newpage
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+3. I suggest the authors compare the findings in figure 1 clearly. Why the performance is so different for different numbers of MVNO. The explanation is not clear and comprehensive.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{3mm}
+
+We thank the reviewer for the valuable comments. In the $2^{nd}$-last sentences of the $2^{nd}$ paragraph in Section VI in the revised manuscript, we have properly addressed the reviewer's comments. To compare the findings more clearly, we also include a new table, Table 1, in the revised manuscript:
+
+\begin{quote}
+\underline{The $2^{nd}$ paragraph in Section VI:}
+\vspace{0mm}\newline{\hspace{3in}``In Fig. 1, we show the convergence performance of Algorithm 1. From Fig. 1, it is observed that our proposed Algorithm 1 converges for about 10 iterations. {\color{red}Furthermore,  the parameters and final convergent results are summarized in Table I. For an MVNO, the larger throughput is expected to obtain, the more bandwidth is needed to provide in most cases. Particularly, the throughput expected to provide for an MVNO can be computed by multiplying the average number of MUs in the cell with the average data transmission rate threshold, i.e., $\mathbb{E}[N_m]\bar{R}_m$. Besides, compared with the $5^{th}$ MVNO, although the throughput expected to obtain for the $1^{st}$ MVNO is larger, the required bandwidth is less. The reason is that the service cell radius of the $1^{st}$ MVNO is much smaller than that of the $5^{th}$ MVNO. In large service cells, to satisfy the QoS constraints for cell-edge MUs, more power will be used to compensate the distance-related large-scale path-loss. Therefore, in order to minimize the sum transmit power used in all MVNOs, more spectrum should be allocated to the cell with large radius.}"}
+\end{quote}
+
+\begin{quote}
+\underline{Table I in Section VI:}
+{\begin{table}[!ht]
+\color{red}
+\caption{Summary of Parameters and Results in Fig. 1, where units for $r_m$, $\lambda_m$, $\mathbb{E}[N_m]$, $\bar{R}_m$, $\mathbb{E}[N_m]\bar{R}_m$, $w_m$ are m, $\mbox{persons/km}^2$, persons, Mbps, Mbps, and MHz, respectively.}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+MVNO & $r_m $ & $\lambda_m$ & $\mathbb{E}[N_m]$	& $\bar{R}_m$ &  $\mathbb{E}[N_m]\bar{R}_m$ & $w_m$ \\
+\hline
+\hline
+1&	80&  1200&  24&  2&  48&  13.51\\
+	\hline
+2&	80&  800&  16&  0.5&  8&  2.2\\
+	\hline
+3&	100&  800&  25&  0.5&  12.5&  4.44\\
+	\hline
+4&	100&  1000&  31&  1&  31&  11.21\\
+	\hline
+5&	120&  1000&  45&  1&  45&  20.14\\
+	\hline
+6&	120&  1200&  54&  2&  108&  48.5\\
+	\hline
+\end{tabular}
+\label{t1}
+\end{table}}
+\end{quote}
+
+\newpage
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+4. The authors need to show the simulation setup used for figure 3 and 4 clearly so the results can be produced for reader to compare their method. Some terms are not explained clearly for their comparison.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{3mm}
+
+We thank the reviewer for the valuable comments. In the $1^{st}$ sentence of the $4^{th}$ paragraph and the $2^{nd}$ sentence of the $5^{th}$ paragraph in Section VI in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The $1^{st}$ sentence of the $4^{th}$ paragraph in Section VI:}
+\vspace{0mm}\newline{\hspace{3in}``In Fig. 3, we present the bandwidth allocation comparison of different schemes{ \color{red}with parameters shown in Table I}."}
+\end{quote}
+
+\begin{quote}
+\underline{The $2^{nd}$ sentence of the $5^{th}$ paragraph in Section VI:}
+\vspace{0mm}\newline{\hspace{3in}``{\color{red} Particularly, we vary the value of $\lambda_6$ while remaining the rest of parameters in Table I unchanged}."}
+\end{quote}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+5. The authors have used blockchain for their method; but they did not measure the performance compared to other conventional methods.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{3mm}
+
+We thank the reviewer for the valuable comments. In the last paragraph in Section VI in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The last paragraph in Section VI:}
+\vspace{0mm}\newline{\hspace{3in}``{\color{red}It is noted that compared to other conventional methods, using permissioned blockchains achieves the following advantages at the expense of extra computation and storage costs in each MVNO:
+\begin{itemize}
+\item By delegating all the computation and data operation tasks to the blockchain and MVNOs, lots of management costs can be saved at the MNO.
+\item Spectrum acquisition, billing and authorization can be performed automatically with the help of smart contracts deployed on the blockchain. The processing delay decreases significantly, making real-time dynamic spectrum access possible.
+\item Due to the transparency of the blockchain, the MVNOs can be ensured that they are charged fairly.
+\item During the spectrum acquisition process, MUs related data doesn't need to be exchanged in the network. Therefore, MUs' privacy can be protected.
+\item Permissioned blockchains are more robust to cyberattack. The network is safe and reliable unless most of the MVNOs have been controlled by the attacker.
+\end{itemize}
+}"}
+\end{quote}
+
+\newpage
+
+\vspace{5mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{REVIEWER 2}}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+This paper presents a decentralized blockchain based dynamic spectrum acquisition scheme for a wireless downlink communication system with multiple MVNOs. The proposed scheme aims to minimize the total power consumption of all MVNOs while meets the average transmission rate. The theoretical analysis is solid. However, my major concern of this work is the necessity of blockchain.
+
+1. The authors mentioned there will be issue if the central node is under attack. I agreed with that. However, the blockchain won't solve the problem in the MVNOs scenario. One basic rule of PoW kind of blockchain is no one should control over $ 50\% $ computation power (a.k.a. $ 51\% $ attack). Large number of non-collusion miners could prevent such attack at a high possibility. However, it seems the number of MVNOs cannot meet such requirement, which would make it vulnerable for the $ 51\% $ attack.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $5^{th}$-$10^{th}$ paragraphs in Section I and in the $2^{nd}$-$8^{th}$ sentences of the $1^{st}$ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The $5^{th}$-$10^{th}$ paragraphs in Section I:}
+\vspace{0mm}\newline{\hspace{3in}``{
+\color{red}
+In the Bitcoin system, users are only allowed to perform a set of given operations. Due to non-Turing-completeness, this system cannot handle more complex business logic. In order to solve this problem, Ethereum was proposed by Vitalik Buterin in 2013 [21]. Ethereum is a Turing-complete system where users can develop programs to run on the Ethereum virtual machine using high-level programming languages. These programs, also called as smart contracts [22], will run on all participants automatically and transparently with pre-coded logic once deployed. Final consistency and correctness can be ensured by the consensus mechanism when the reliable nodes are the majority in the network [21].
+
+
+\hspace{0.15in} Both Bitcoin and Ethereum belong to public blockchains [23]. Public blockchains, sometimes referred to as permission-less blockchains, are totally decentralized blockchains that open to everyone in the world. Everyone can take participant in the public blockchains from everywhere at any time without registration and authentication. Everyone has right to operate the blockchains, such as sending and verifying new transactions as well as reading and saving past verified transactions.
+
+\hspace{0.15in} In public blockchains, the consensus is built between all participants with  Nakamoto-type incentive mechanism, such as PoW and proof of stake [24] protocol. In order to stimulate nodes to help maintain the blockchains instead of attacking and subverting, cryptocurrency is awarded to the consensus participants according to their computational efforts. Due to a large number of participants, achieving consensus in public blockchains is time-consuming and power-demanding which restricts the application of blockchains in many scenarios.
+
+\hspace{0.15in} Apart from public blockchains, another primary type of blockchains is permissioned blockchains [25]. Permissioned blockchains are also called as private blockchains or consortium blockchains when they are managed by one or more predefined participants, respectively. In permissioned blockchains,  permissions to join and operate the blockchains are strictly controlled by predefined participants. Predefined participants are responsible for creating consensus in permissioned blockchains.
+
+\hspace{0.15in} Due to the limited number of predefined participants and controllable trust among them, more efficient electing and voting based low complexity consensus algorithm can be employed. For example,  practical Byzantine fault tolerance (PBFT) [26] based three rounds double-check protocol is adopted by HyperLedger Fabric v0.5 [27]. Both Raft [28] and PBFT-inspired consensus algorithms are employed by Quorum [29] and R3 Corda [30]. Compared with the throughput of dozens of transactions per second (TPS) in public blockchains, private blockchains can handle approximately thousands of TPS [31] which can meet the demand in most application scenarios.
+
+\hspace{0.15in} To accelerate the computation and guarantee the security during dynamic spectrum acquisition, we assume that the consensus algorithm is performed on permissioned blockchains throughout the paper.}"}
+\end{quote}
+
+\begin{quote}
+\underline{The $1^{st}$ paragraph in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``Consider a wireless downlink communication system with $M$ MVNOs. {\color{red}
+It is assumed that most of MVNOs are reliable. They are predefined participants of a permissioned MVNO-based blockchain regulated by the MNO. Smart contract can be deployed on the permissioned blockchain to help the MNO manage the network. MNO permits reliable MVNOs to join the blockchain and kicks out those have malicious intentions. MNO also charges the MVNOs and authorizes them to use the spectrum with the help of smart contracts. All MVNOs have permissions to operate the blockchain. The consensus is built by all MVNOs via the low complexity consensus algorithm, e.g., PBFT and Raft.} Each MVNO serves the MUs in a cell. The $m$-th transmission cell, $m\in\mathcal{M}=\{1,2,\cdots,M\}$, is assumed to be a fixed circular region, denoted as  $\mathcal{D}_m\in \mathbb{R}^2$, whose radius is denoted as $r_m$. The $m$-th MVNO is located at the cell center."}
+\end{quote}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+2. The small number of MVNOs could lead another problem. Fake information (such as $z_m$, $u_m$) could be easily injected into blockchain by malicious MVNO. Since the result of next iteration is built on the previous iteration and the information from the peers, the fake information could easily expand over whole network and make the ultimate result incorrect.
+
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $5^{th}$ paragraph in Section I and the $3^{rd}$ paragraph from the bottom in Section IV in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The $5^{th}$ paragraphs in Section I:}
+\vspace{0mm}\newline{\hspace{3in}``{\color{red}In the Bitcoin system, users are only allowed to perform a set of given operations. Due to non-Turing-completeness, this system cannot handle more complex business logic. In order to solve this problem, Ethereum was proposed by Vitalik Buterin in 2013 [21]. Ethereum is a Turing-complete system where users can develop programs to run on the Ethereum virtual machine using high-level programming languages. These programs, also called as smart contracts [22], will run on all participants automatically and transparently with pre-coded logic once deployed. Final consistency and correctness can be ensured by the consensus mechanism when the reliable nodes are the majority in the network [21].}"}
+\end{quote}
+
+\begin{quote}
+\underline{The $3^{rd}$ paragraph from the bottom in Section IV:}
+\vspace{0mm}\newline{\hspace{3in}``{\color{red} In Algorithm 1, both $\mbox{SC}_1$ and $\mbox{SC}_2$ are smart contracts deployed on the permissioned blockchain. $\mbox{SC}_1$ and $\mbox{SC}_2$ will run on all MVNOs. Smart contract $\mbox{SC}_1$ receives the local computational result $w_m^{(l+1)}$ which sent from each MVNO as input, and compute $\mathbf{z}^{(l+1)}$ and $\mathbf{u}^{(l+1)}$. Based on the assumption that most MVNOs are reliable, the final correctness of $\mathbf{z}^{(l+1)}$ and $\mathbf{u}^{(l+1)}$ can be guaranteed even there exist some malicious participants due to the consensus mechanism. If the convergent condition is satisfied, the result will be sent to smart contract $\mbox{SC}_2$. If not, result will be sent back to MVNOs. Smart contract $\mbox{SC}_2$ receives convergent result sent from $\mbox{SC}_1$ as input. Then it charges all MVNOs and authorizes them to use their acquired spectrum according to the final convergent result.}"}
+\end{quote}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+3. Another issue is that the transaction finality of PoW kind of blockchain is slow, which means it is not a good candidate for real-time application (such as MVNOs).
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $5^{th}$-$10^{th}$ paragraphs in Section I and in the $2^{nd}$-$8^{th}$ sentences of the $1^{st}$ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The $5^{th}$-$10^{th}$ paragraphs in Section I:}
+\vspace{0mm}\newline{\hspace{3in}``{
+\color{red}
+In the Bitcoin system, users are only allowed to perform a set of given operations. Due to non-Turing-completeness, this system cannot handle more complex business logic. In order to solve this problem, Ethereum was proposed by Vitalik Buterin in 2013 [21]. Ethereum is a Turing-complete system where users can develop programs to run on the Ethereum virtual machine using high-level programming languages. These programs, also called as smart contracts [22], will run on all participants automatically and transparently with pre-coded logic once deployed. Final consistency and correctness can be ensured by the consensus mechanism when the reliable nodes are the majority in the network [21].
+
+\hspace{0.15in} Both Bitcoin and Ethereum belong to public blockchains [23]. Public blockchains, sometimes referred to as permission-less blockchains, are totally decentralized blockchains that open to everyone in the world. Everyone can take participant in the public blockchains from everywhere at any time without registration and authentication. Everyone has right to operate the blockchains, such as sending and verifying new transactions as well as reading and saving past verified transactions.
+
+\hspace{0.15in} In public blockchains, the consensus is built between all participants with  Nakamoto-type incentive mechanism, such as PoW and proof of stake [24] protocol. In order to stimulate nodes to help maintain the blockchains instead of attacking and subverting, cryptocurrency is awarded to the consensus participants according to their computational efforts. Due to a large number of participants, achieving consensus in public blockchains is time-consuming and power-demanding which restricts the application of blockchains in many scenarios.
+
+\hspace{0.15in} Apart from public blockchains, another primary type of blockchains is permissioned blockchains [25]. Permissioned blockchains are also called as private blockchains or consortium blockchains when they are managed by one or more predefined participants, respectively. In permissioned blockchains,  permissions to join and operate the blockchains are strictly controlled by predefined participants. Predefined participants are responsible for creating consensus in permissioned blockchains.
+
+\hspace{0.15in} Due to the limited number of predefined participants and controllable trust among them, more efficient electing and voting based low complexity consensus algorithm can be employed. For example,  practical Byzantine fault tolerance (PBFT) [26] based three rounds double-check protocol is adopted by HyperLedger Fabric v0.5 [27]. Both Raft [28] and PBFT-inspired consensus algorithms are employed by Quorum [29] and R3 Corda [30]. Compared with the throughput of dozens of transactions per second (TPS) in public blockchains, private blockchains can handle approximately thousands of TPS [31] which can meet the demand in most application scenarios.
+
+\hspace{0.15in} To accelerate the computation and guarantee the security during dynamic spectrum acquisition, we assume that the consensus algorithm is performed on permissioned blockchains throughout the paper.}"}
+\end{quote}
+
+\begin{quote}
+\underline{The $1^{st}$ paragraph in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``Consider a wireless downlink communication system with $M$ MVNOs. {\color{red}
+It is assumed that most of MVNOs are reliable. They are predefined participants of a permissioned MVNO-based blockchain regulated by the MNO. Smart contract can be deployed on the permissioned blockchain to help the MNO manage the network. MNO permits reliable MVNOs to join the blockchain and kicks out those have malicious intentions. MNO also charges the MVNOs and authorizes them to use the spectrum with the help of smart contracts. All MVNOs have permissions to operate the blockchain. The consensus is built by all MVNOs via the low complexity consensus algorithm, e.g., PBFT and Raft.} Each MVNO serves the MUs in a cell. The $m$-th transmission cell, $m\in\mathcal{M}=\{1,2,\cdots,M\}$, is assumed to be a fixed circular region, denoted as  $\mathcal{D}_m\in \mathbb{R}^2$, whose radius is denoted as $r_m$. The $m$-th MVNO is located at the cell center."}
+\end{quote}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+
+4. It seems the manuscripts not well prepared, such as the inconsistency of notation ``$j$-th MU in the $i$-th" against ``$n$-th MU in the $m$-th".
+
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the revised manuscript, we have checked carefully and corrected the above and other typos.
+
+\begin{quote}
+\underline{The paragraph between Eqn. (5) and Eqn. (6) in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``Accordingly, the expected data transmission rate of {\color{red}the $n$-th MU in the $m$-th cell }is expressed as"}
+\end{quote}
+
+\newpage
+\vspace{5mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{REVIEWER
+3}}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+The paper proposes a Blockchain based dynamic spectrum acquisition scheme for the wireless downlink communcation, which aims to minimize the sum transmit power at all MVNOs while satisfying the average data transmission rate thresholds.
+
+There are several issues left unclear or undiscovered. My main concerns are as follows:
+
+1) The author mentioned the network visualization involves MNOs and MVNOs. The detailed discussion of spectrum leasing process is needed for the purpose of better understanding.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $2^{nd}$-$3^{rd}$ paragraphs from the bottom in Section IV in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The $2^{nd}$-$3^{rd}$ paragraphs from the bottom in Section IV:}
+\vspace{0mm}\newline{\hspace{3in}``{\color{red} In Algorithm 1, both $\mbox{SC}_1$ and $\mbox{SC}_2$ are smart contracts deployed on the permissioned blockchain. $\mbox{SC}_1$ and $\mbox{SC}_2$ will run on all MVNOs. Smart contract $\mbox{SC}_1$ receives the local computational result $w_m^{(l+1)}$ which sent from each MVNO as input, and compute $\mathbf{z}^{(l+1)}$ and $\mathbf{u}^{(l+1)}$. Based on the assumption that most MVNOs are reliable, the final correctness of $\mathbf{z}^{(l+1)}$ and $\mathbf{u}^{(l+1)}$ can be guaranteed even there exist some malicious participants due to the consensus mechanism. If the convergent condition is satisfied, the result will be sent to smart contract $\mbox{SC}_2$. If not, result will be sent back to MVNOs. Smart contract $\mbox{SC}_2$ receives convergent result sent from $\mbox{SC}_1$ as input. Then it charges all MVNOs and authorizes them to use their acquired spectrum according to the final convergent result.
+	
+\hspace{0.15in} Unlike the MNO in traditional centralized spectrum acquisition situation, smart contracts $\mbox{SC}_1$ and $\mbox{SC}_2$ take all network demands into consideration, where $\mathbf{w}^{(l+1)}$ and $\mathbf{z}^{(l+1)}$ can be viewed as the spectrum demand of MVNOs and the spectrum MNO can provide to MVNOs, respectively. Iteration is similar to the negotiation process between MNO and MVNOs in traditional centralized spectrum acquisition situation. After several rounds of negotiations, a final agreement can be achieved.}"}
+\end{quote}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+2) ADMM is introduced in this work to obtain the global optimal
+solution to aforementioned optimization problem. An essential assumption author made in the manuscript is that variable $\mathbf{z}$ and $\mathbf{u}$ can be updated or acquired from the blockchain. I noticed that this is the only place involves the blockchain technology.
+\begin{enumerate}[(a)]
+\item What the system scheme of blockchain based dynamic spectrum acquisition looks like?
+\item Is that server-based or mobile device-based?
+\item What is the issue existed in blockchain platform while implementing the proposed scheme?
+\end{enumerate}
+
+
+
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments.
+\begin{enumerate}[(a)]
+\item In the $2^{nd}$-$3^{rd}$ paragraphs from the bottom in Section IV in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The paragraph between Eqn. (5) and Eqn. (6) in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``{\color{red} In Algorithm 1, both $\mbox{SC}_1$ and $\mbox{SC}_2$ are smart contracts deployed on the permissioned blockchain. $\mbox{SC}_1$ and $\mbox{SC}_2$ will run on all MVNOs. Smart contract $\mbox{SC}_1$ receives the local computational result $w_m^{(l+1)}$ which sent from each MVNO as input, and compute $\mathbf{z}^{(l+1)}$ and $\mathbf{u}^{(l+1)}$. Based on the assumption that most MVNOs are reliable, the final correctness of $\mathbf{z}^{(l+1)}$ and $\mathbf{u}^{(l+1)}$ can be guaranteed even there exist some malicious participants due to the consensus mechanism. If the convergent condition is satisfied, the result will be sent to smart contract $\mbox{SC}_2$. If not, result will be sent back to MVNOs. Smart contract $\mbox{SC}_2$ receives convergent result sent from $\mbox{SC}_1$ as input. Then it charges all MVNOs and authorizes them to use their acquired spectrum according to the final convergent result.
+	
+\hspace{0.15in} Unlike the MNO in traditional centralized spectrum acquisition situation, smart contracts $\mbox{SC}_1$ and $\mbox{SC}_2$ take all network demands into consideration, where $\mathbf{w}^{(l+1)}$ and $\mathbf{z}^{(l+1)}$ can be viewed as the spectrum demand of MVNOs and the spectrum MNO can provide to MVNOs, respectively. Iteration is similar to the negotiation process between MNO and MVNOs in traditional centralized spectrum acquisition situation. After several rounds of negotiations, a final agreement can be achieved.}"}
+\end{quote}
+	
+\item The blockchain system runs on the MVNOs which is server-based. In the $2^{nd}$-$8^{th}$ sentences of the $1^{st}$ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The $1^{st}$ paragraph in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``Consider a wireless downlink communication system with $M$ MVNOs. {\color{red}
+It is assumed that most of MVNOs are reliable. They are predefined participants of a permissioned MVNO-based blockchain regulated by the MNO. Smart contract can be deployed on the permissioned blockchain to help the MNO manage the network. MNO permits reliable MVNOs to join the blockchain and kicks out those have malicious intentions. MNO also charges the MVNOs and authorizes them to use the spectrum with the help of smart contracts. All MVNOs have permissions to operate the blockchain. The consensus is built by all MVNOs via the low complexity consensus algorithm, e.g., PBFT and Raft.} Each MVNO serves the MUs in a cell. The $m$-th transmission cell, $m\in\mathcal{M}=\{1,2,\cdots,M\}$, is assumed to be a fixed circular region, denoted as  $\mathcal{D}_m\in \mathbb{R}^2$, whose radius is denoted as $r_m$. The $m$-th MVNO is located at the cell center."}
+\end{quote}
+
+\item In the $1^{st}$ sentence of the last paragraph in Section VI in the revised manuscript, we have properly addressed the reviewer's comments:
+    
+\begin{quote}
+\underline{The $1^{st}$ paragraph in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``{\color{red}It is noted that compared to other conventional methods, using permissioned blockchains achieves the following advantages at the expense of extra computation and storage costs in each MVNO ...}"}
+\end{quote}
+\end{enumerate}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+
+3) Most importantly, in the process of running the ADMM based optimization algorithm, the variables $\mathbf{z}$ and $\mathbf{u}$ are supposed to be updated and acquired instantly on blockchain. I believe the speed of optimization algorithm will be slowed down due to the high mining complexity and consensus overhead. Author needs to justify feasibility of proposed scheme in this aspect.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $5^{th}$-$10^{th}$ paragraphs in Section I and in the $2^{nd}$-$8^{th}$ sentences of the $1^{st}$ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments:
+
+\begin{quote}
+\underline{The $5^{th}$-$10^{th}$ paragraphs in Section I:}
+\vspace{0mm}\newline{\hspace{3in}``{
+\color{red}
+In the Bitcoin system, users are only allowed to perform a set of given operations. Due to non-Turing-completeness, this system cannot handle more complex business logic. In order to solve this problem, Ethereum was proposed by Vitalik Buterin in 2013 [21]. Ethereum is a Turing-complete system where users can develop programs to run on the Ethereum virtual machine using high-level programming languages. These programs, also called as smart contracts [22], will run on all participants automatically and transparently with pre-coded logic once deployed. Final consistency and correctness can be ensured by the consensus mechanism when the reliable nodes are the majority in the network [21].
+
+\hspace{0.15in} Both Bitcoin and Ethereum belong to public blockchains [23]. Public blockchains, sometimes referred to as permission-less blockchains, are totally decentralized blockchains that open to everyone in the world. Everyone can take participant in the public blockchains from everywhere at any time without registration and authentication. Everyone has right to operate the blockchains, such as sending and verifying new transactions as well as reading and saving past verified transactions.
+
+\hspace{0.15in} In public blockchains, the consensus is built between all participants with  Nakamoto-type incentive mechanism, such as PoW and proof of stake [24] protocol. In order to stimulate nodes to help maintain the blockchains instead of attacking and subverting, cryptocurrency is awarded to the consensus participants according to their computational efforts. Due to a large number of participants, achieving consensus in public blockchains is time-consuming and power-demanding which restricts the application of blockchains in many scenarios.
+
+\hspace{0.15in} Apart from public blockchains, another primary type of blockchains is permissioned blockchains [25]. Permissioned blockchains are also called as private blockchains or consortium blockchains when they are managed by one or more predefined participants, respectively. In permissioned blockchains,  permissions to join and operate the blockchains are strictly controlled by predefined participants. Predefined participants are responsible for creating consensus in permissioned blockchains.
+
+\hspace{0.15in} Due to the limited number of predefined participants and controllable trust among them, more efficient electing and voting based low complexity consensus algorithm can be employed. For example,  practical Byzantine fault tolerance (PBFT) [26] based three rounds double-check protocol is adopted by HyperLedger Fabric v0.5 [27]. Both Raft [28] and PBFT-inspired consensus algorithms are employed by Quorum [29] and R3 Corda [30]. Compared with the throughput of dozens of transactions per second (TPS) in public blockchains, private blockchains can handle approximately thousands of TPS [31] which can meet the demand in most application scenarios.
+
+\hspace{0.15in} To accelerate the computation and guarantee the security during dynamic spectrum acquisition, we assume that the consensus algorithm is performed on permissioned blockchains throughout the paper.}"}
+\end{quote}
+
+\begin{quote}
+\underline{The $1^{st}$ paragraph in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``Consider a wireless downlink communication system with $M$ MVNOs. {\color{red}
+It is assumed that most of MVNOs are reliable. They are predefined participants of a permissioned MVNO-based blockchain regulated by the MNO. Smart contract can be deployed on the permissioned blockchain to help the MNO manage the network. MNO permits reliable MVNOs to join the blockchain and kicks out those have malicious intentions. MNO also charges the MVNOs and authorizes them to use the spectrum with the help of smart contracts. All MVNOs have permissions to operate the blockchain. The consensus is built by all MVNOs via the low complexity consensus algorithm, e.g., PBFT and Raft.} Each MVNO serves the MUs in a cell. The $m$-th transmission cell, $m\in\mathcal{M}=\{1,2,\cdots,M\}$, is assumed to be a fixed circular region, denoted as  $\mathcal{D}_m\in \mathbb{R}^2$, whose radius is denoted as $r_m$. The $m$-th MVNO is located at the cell center."}
+\end{quote}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+4) The spectrum acquisition is performed several minutes? Is this a reasonable assumption for the lantency-aware dynamic spectrum acquisition system?
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $1^{st}$ sentence of the $2^{nd}$ paragraph in Section II in the revised manuscript, we have replaced ``minutes" with ``seconds".
+
+\begin{quote}
+\underline{The $1^{st}$ sentence of the $2^{nd}$ paragraph in Section II:}
+\vspace{0mm}\newline{\hspace{3in}``With wireless network virtualization operation, the whole communication processes are divided into multiple periods, each measured in {\color{red}seconds}."}
+\end{quote}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+5) Author needs to fix the typos like ``smart phone" and change the word in ``actual required minimum sum transmit power" into ``actually required minimum sum transmit power".
+
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the revised manuscript, we have checked carefully and corrected the above and other typos.
+
+\begin{quote}
+\underline{The $1^{st}$ sentence of the $1^{st}$ paragraph in Section I:}
+\vspace{0mm}\newline{\hspace{3in}``With the popularity of various {\color{red} smartphones}, an exponential traffic growth is generated by wireless applications in next generation 5G networks and beyond [1]-[4]."}
+\end{quote}
+
+\begin{quote}
+\underline{The $6^{th}$ sentence of the Abstarct:}
+\vspace{0mm}\newline{\hspace{3in}``To examine the effectiveness of our proposed scheme, with known system parameters, we also theoretically derive the semi-closed-form solution to the {\color{red} actually} required sum transmit power minimization problem subject to data transmission rate constraints."}
+\end{quote}
+
+\begin{quote}
+\underline{The $1^{st}$ sentence of the $3^{rd}$ paragraph from the bottom in Section I:}
+\vspace{0mm}\newline{\hspace{3in}``To fairly compare the performance of our proposed scheme with the fixed spectrum allocation scheme and other schemes, with known system parameters, we propose to investigate the {\color{red}actually} required minimum sum transmit power of all MVNOs subject to that the data transmission rate thresholds for all MUs in all cells are satisfied."}
+\end{quote}
+
+\end{document}
