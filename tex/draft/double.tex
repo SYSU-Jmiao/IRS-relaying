@@ -8,7 +8,7 @@
 \usepackage[boxed,noline]{algorithm2e}
 \usepackage{mathrsfs}
 \usepackage{cases}
-\usepackage{bm, comment,color,amssymb,framed}
+\usepackage{bm, comment,color,amssymb}
 \usepackage{cite,epstopdf}
 \renewcommand{\thefootnote}{\arabic{footnote}}
 \newcommand{\trace}{\mathop{\mathrm{Tr}}}%\trace
@@ -49,10 +49,10 @@ while fairness among MUs as well as MNOs. \cite{YXZhang1} proposed a two-stage s
 All the above dynamic spectrum allocation schemes in VWNs can improve the usage of spectrum efficiently. While spectrum management in licensed bands has
 mostly been controlled by responsible government agencies, the requirement of bringing market based reform in spectrum trading is being increasingly recognized to promote flexibility in radio spectrum use \cite{FBltr}. Thus, a central utility is needed to manage and record the usage of the spectrum as well as charge MUs for the spectrum occupation. However, following problems may arise in such a centralized utility: firstly, the overhead of management is quite high; secondly, the centralized structure is not robust to cyberattacks; thirdly, spectrum leasing fee is not transparent. Therefore, a smarter and more decentralized dynamic spectrum access technique, e.g., blockchain, is emerging.
 
-Blockchain, which was invented by Satoshi Nakamoto in 2008, is an emerging technology to build consensus between disparate individuals \cite{SNakamoto}. The intuition is to solve the double-spending problem in the cryptocurrency bitcoin without the use of a trusted central utility. Blockchain consists of lists of blocks which are linked by hash algorithm. Each block includes collections of signatured transactions. A new block can be appended to the end of the current blockchain after solving a proof-of-work (PoW) puzzle which is to find a number whose hash value is less than the current target. PoW can create distributed consensus between all participants and solve the double-spend problem. The data on blockchain is shared and saved by all participants on peer-to-peer networks. All participants have right to access but cannot tamper the data on blockchain. The pillars of blockchain are state-of-the-art cryptography and PoW based distributed consensus mechanism. This kind of system may introduce some computational cost but can provide decentrality, security, transparency and robustness. The blockchain technologies have attracted remarkable interests and have been used in many areas extensively \cite{KGai,PKSharma,ZXiong,DBRawat,E. Münsing,KKotobi}. In \cite{KGai}, potential fusion of blockchains and cloud computing from the perspectives of secure data transfer and transparent data usage was investigated. To satisfy the rapid increase in the number and diversity
+Blockchain, which was invented by Satoshi Nakamoto in 2008, is an emerging technology to build consensus between disparate individuals \cite{SNakamoto}. The intuition is to solve the double-spending problem in the cryptocurrency bitcoin without the use of a trusted central utility. Blockchain consists of lists of blocks which are linked by hash algorithm. Each block includes collections of signatured transactions. A new block can be appended to the end of the current blockchain after solving a proof-of-work (PoW) puzzle which is to find a number whose hash value is less than the current target. PoW can create distributed consensus between all participants and solve the double-spend problem. The data on blockchain is shared and saved by all participants on peer-to-peer networks. All participants have right to access but cannot tamper the data on blockchain. The pillars of blockchain are state-of-the-art cryptography and PoW based distributed consensus mechanism. This kind of system may introduce some computational cost but can provide decentrality, security, transparency and robustness. The blockchain technologies have attracted remarkable interests and have been used in many areas extensively \cite{KGai,PKSharma,ZXiong,DBRawat,E. Munsing,KKotobi}. In \cite{KGai}, potential fusion of blockchains and cloud computing from the perspectives of secure data transfer and transparent data usage was investigated. To satisfy the rapid increase in the number and diversity
 of smart phones connected to the Internet, a new distributed secure Internet of Things (IoT) network architecture named DistBlockNet was proposed in \cite{PKSharma}. The paper in \cite{ZXiong} investigated the price-based computing resource management in PoW based public blockchain networks to support offloading mining tasks intended for cloud/fog provider. In \cite{DBRawat}, the authors leveraged the blockchain based scheme for MVNOs to serve wireless users without sharing their
 private information to anyone else
-and enhance overall network coverage and capacity. By using blockchains and smart contracts, the work in \cite{E. Münsing} proposed a decentralized ADMM based optimal power flow (OPF) model for a microgrid. A blockchain based spectrum sharing scheme and a virtual cryptocurrency named Specoins was proposed in \cite{KKotobi}, which makes mobile users access the wireless channel dynamically in cognitive radio (CR) networks. However, to the best of our knowledge, the blockchain-based dynamic spectrum allocation combined with convex optimization in VWNs is still missing.
+and enhance overall network coverage and capacity. By using blockchains and smart contracts, the work in \cite{E. Munsing} proposed a decentralized ADMM based optimal power flow (OPF) model for a microgrid. A blockchain based spectrum sharing scheme and a virtual cryptocurrency named Specoins was proposed in \cite{KKotobi}, which makes mobile users access the wireless channel dynamically in cognitive radio (CR) networks. However, to the best of our knowledge, the blockchain-based dynamic spectrum allocation combined with convex optimization in VWNs is still missing.
 
 In this paper, we investigate a two-stage spectrum leasing framework in the virtualized wireless network (VWN). During the first stage, the mobile network operator (MNO) leases spectrum to $N$ mobile virtual network operators (MVNOs). We focus on the spectrum and power allocation factors design which minimizes the total transmit power at MVNOs. The original optimization problem is hard to be solved due to the complex integration expressions in the constraints. We first employ half-range Gauss-Hermite Quadrature (HR-GHQ) to simplify the optimization problem. Then, we propose a blockchain-based spectrum management scheme combined with alternative direction method of multipliers (ADMM) to obtain the global optimal solutions. Such a distributed optimization scheme based on blockchain can ensure security and transparency during the spectrum management. During the second stage, each MVNO dynamically allocates the spectrum that has already been rent from MNO to mobile users (MUs). We derive closed-form expressions for the optimal spectrum and power allocation for each MVNO. Simulation results are provided to validate the effectiveness of our proposed algorithm.
 
@@ -66,7 +66,7 @@ Consider a wireless communication system with one MNO and $N$ MVNOs. With wirele
 \end{align}
 where the total bandwidth owned by MNO is $W_{sum}$ Hertz (Hz). In this paper, without loss of generality, we approximate the $i$-th transmission cell as a fixed circular region $\mathcal{D}(\mathbf{o}_i, r_i) \in \mathbb{R}^2$, where $r_i$ denotes the cell radius and $\mathbf{o}_i$ denotes the cell center. The $i$-th MVNO is located at the origin $\mathbf{o}_i$. The locations of MUs are modeled as a realization of a Poisson point process (PPP) with intensity $\lambda_i$ in the $i$-th cell. The locations of MUs associated with the $i$-th MVNO are denoted as $\mathcal{X}_i = \{\mathbf{x}_{ij} \in \mathbb{R}^2 | j = 1, \cdots, N_i\}$, where $N_i = \pi r_i^2 \lambda_i$ is the expected number of MUs in the $i$-th cell. Note that the user set $\mathcal{X}_i$ changes with arrivals, departure, and movements of MUs.
 
-Suppose that transmitted signals are affected by both large-scale path loss and fast Rayleigh fading. Thus, the channel between the $j$-th MU and its associated $i$-th MVNO is denoted by $h_{ij} = \frac{C g_{ij}}{\sqrt{1 + {\left\| \mathbf{x}_{ij} - \mathbf{o}_i \right\|}^\alpha}}$, where $\alpha$ denotes the path-loss decay factor  and $g_{ij}$ denotes the Rayleigh fading channel state information (CSI), i.e., $g_{ij}$ is a complex Gaussian random variable with zero mean and unit variance. The instantaneous data rate for the $j$-th MU in the $i$-th MVNO is given by
+Suppose that transmitted signals are affected by both large-scale path loss and fast Rayleigh fading. Thus, the channel between the $j$-th MU and its associated $i$-th MVNO is denoted by $h_{ij} = \frac{g_{ij}}{\sqrt{1 + {\left\| \mathbf{x}_{ij} - \mathbf{o}_i \right\|}^\alpha}}$, where $\alpha$ denotes the path-loss decay factor  and $g_{ij}$ denotes the Rayleigh fading channel state information (CSI), i.e., $g_{ij}$ is a complex Gaussian random variable with zero mean and unit variance. The instantaneous data rate for the $j$-th MU in the $i$-th MVNO is given by
 \begin{align}
 	R_{ij} = b_{ij}\log_2\left(1 + \frac{q_{ij} \left|h_{ij} \right|^2 }{\Gamma b_{ij}\sigma_0}\right),
 \end{align}
@@ -75,7 +75,7 @@ non-ideal coding and modulation in practice \cite{JGDForney}. We assume that the
 \begin{figure}
 	\centering
 	\includegraphics[width=3.6in]{Pic.eps}
-	\caption{Two-stage spectrum leasing network. During the first stage, MVNOs rent spectrum from an MNO based on the arrival rate and QoS of MUs. During the second stage, each MVNO allocates the obtained spectrum dynamically to a set of MUs. }
+	\caption{Two-stage spectrum leasing network. During the first stage, MVNOs rent spectrum from an MNO based on the arrival rate and QoS of MUs. During the second stage, each MVNO allocates the obtained spectrum dynamically to a set of MUs.}
 \end{figure}
 
 The two-stage spectrum leasing processes are operated in two timescales, namely a period and a time slot. As shown in Fig. 1, the first stage is operated in a period and often measured in hours, where each MVNO rents wireless spectrum from a MNO. The second stage is operated in multiple time slots and often measured in milliseconds. Each period has multiple time slots. Wireless channel fading remains constant in a time slot but may change from one time slot to another. Notice that MVNOs will not release the occupied spectrum until the end of the whole period. We will discuss these two stages in the following two sections.
@@ -83,31 +83,11 @@ The two-stage spectrum leasing processes are operated in two timescales, namely 
 \section{Spectrum leasing and power allocation during the first stage}
 
 \subsection{Problem formulation}
-\begin{framed}
-	During the first stage, the CSI of each MU in each MVNO is a random variable. So, we first assume that the bandwidth and power allocated to all MUs at each MVNO are equal, namely, $b_{ij} = \frac{w_i}{N_i}$ and $q_{ij} = \frac{p_i}{N_i}, \forall i$. Thus, the expected data transmission rate of the $j$-th MU in the $i$-th cell is expressed as
-	\begin{align}
-	E\left({R}_{ij}\right) = \int_{0}^{\infty} \frac{w_i}{N_i} \log_2\left(1 + \frac{p_i x}{w_i n_0}\right) f_{\left|h_{ij} \right|^2} \left(x\right)dx
-	\end{align}
-	where $p_i$ denotes the total transmission power budget at the $i$-th MVNO, $f_{\left|h_{ij} \right|^2} \left(x\right)$ is the probability density function (PDF) of the random variable $\left|h_{ij} \right|^2$, $n_0 = \Gamma \sigma_0$. 
-\end{framed}
-{\color{red}{Please change the text in the box above as follows:}}
-\begin{framed}
-{ \color{blue}{During the first stage, the CSI of each MU in each MVNO is a random variable. So, we first assume that the bandwidth and power allocated to all MUs at each MVNO are equal, namely, $b_{ij} = \frac{w_i}{N_i}$ and $q_{ij} = \frac{p_i}{N_i}, \forall i$.} The actual number of MUs in the $i$-th cell during one time slot follows Poisson distribution with event rate $N_i$, i.e., $n_i \sim \mbox{Pois}\left(N_i\right)$. Consequently, the probability density function (PDF) of $n_i$ is 
+During the first stage, the CSI of each MU in each MVNO is a random variable. So, we first assume that the bandwidth and power allocated to all MUs at each MVNO are equal, namely, $b_{ij} = \frac{w_i}{N_i}$ and $q_{ij} = \frac{p_i}{N_i}, \forall i$. Thus, the expected data transmission rate of the $j$-th MU in the $i$-th cell is expressed as
 \begin{align}
-f_{n_i}\left(k\right) = \mbox{Prob}\left(n_i = k\right) = \frac{e^{-N_i}N_i^k}{k!}, \quad k \in \mathbb{Z}^+,
+E\left({R}_{ij}\right) = \int_{0}^{\infty} \frac{w_i}{N_i} \log_2\left(1 + \frac{p_i x}{w_i n_0}\right) f_{\left|h_{ij} \right|^2} \left(x\right)dx
 \end{align}
-where $\mathbb{Z}^+$ denotes the set of nonnegative integers. Thus, the expected data transmission rate of the $j$-th MU in the $i$-th cell is expressed as
-\begin{align}
-& E\left(R_{ij}\right) \nonumber \\& = \sum\limits_{k = 1}^{\infty} \int_{0}^{\infty} \frac{w_i}{k}\log_2\left(1 + \frac{p_i x}{w_i n_0}\right)f_{\left|h_{i,j}\right|^2}\left(x\right)dx f_{n_i}\left(k\right) \nonumber \\
-& = s\left(N_i\right)\int_{0}^{\infty} w_i\log_2\left(1 + \frac{p_i x}{w_i n_0} \right)f_{\left|h_{i,j}\right|^2}\left(x\right)dx
-\end{align}
-where $s\left(N_i\right) = \sum\limits_{k = 1}^{\infty} \frac{1}{k}f_{n_i}\left(k\right) = e^{-N_i}\sum\limits_{k = 1}^{\infty}\frac{N_i^k}{kk!}$. According to \cite{MAbramowitz}, $s\left(N_i\right)$ can be further written as
-\begin{align}
-s\left(N_i\right) = e^{-N_i}\left(Ei\left(N_i\right) - \ln\left(N_i\right) - \gamma_{EM}\right)
-\end{align}
-where $Ei\left(\cdot\right)$ is the exponential integral function and its series expansion is $Ei\left(x\right) = \gamma_{EM} + \ln x + \sum\limits_{n = 1}^{\infty}\frac{x^n}{nn!}$ \cite[5.1.10]{MAbramowitz}. $\gamma_{EM}$ denotes the Euler-Mascheroni constant.
-}
-\end{framed}
+where $p_i$ denotes the total transmission power budget at the $i$-th MVNO, $f_{\left|h_{ij} \right|^2} \left(x\right)$ is the probability density function (PDF) of the random variable $\left|h_{ij} \right|^2$, $n_0 = \Gamma \sigma_0$. 
 
 During the first stage, we aim at minimizing the total transmit power at all MVNOs under the QoS requirement at each MU in each MVNO and the total bandwidth constraint at the MNO by properly choosing the transmit power $p_i$ and the bandwidth $w_i$. Thus, the optimization problem is formulated as
 \begin{subequations}\label{q4}
@@ -517,7 +497,7 @@ From theoretical gain to practical solution," \emph{in Proc. International Telet
 
 \bibitem{DBRawat}D. B. Rawat and A. Alshaikhi, ``Leveraging Distributed Blockchain-based Scheme for Wireless Network Virtualization with Security and QoS Constraints," in \emph{2018 International Conference on Computing, Networking and Communications (ICNC 2018)}, 2018, pp. 332-336.
 
-\bibitem{E. Münsing}E. M\"{u}nsing, J. Mather, and S. Moura, ``Blockchains for decentralized optimization of energy resources in microgrid networks,’’ in \emph{Proc. IEEE
+\bibitem{E. Munsing}E. M\"{u}nsing, J. Mather, and S. Moura, ``Blockchains for decentralized optimization of energy resources in microgrid networks,’’ in \emph{Proc. IEEE
 Conf. Control Technol. Appl. (CCTA)}, Aug. 2017, pp. 2164-2171.
 
 \bibitem{KKotobi}K. Kotobi and S. G. Bilen, ``Secure Blockchains for Dynamic Spectrum Access: A Decentralized Database in Moving Cognitive Radio Networks Enhances Security and User Access," \emph{IEEE Veh. Technol. Mag.}, vol. 13, no. 1, pp. 32-39, Mar. 2018.
