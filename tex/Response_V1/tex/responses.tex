@@ -1,0 +1,243 @@
+\documentclass[12pt,draftcls, onecolumn]{IEEEtran}
+\usepackage{times,amsmath,color,amssymb,graphicx,epsfig,cite,geometry,psfrag}%,subfigure}%
+\geometry{letterpaper,top=0.85in,bottom=0.85in,left=0.85in,right=0.85in}
+%\usepackage[german]{babel}
+\usepackage{cases,hyperref,enumerate,comment}
+
+\newcommand{\mf}{\mathbf}
+\begin{document}
+\title{Responses for the Reviewers' Comments}
+\maketitle \vspace{-15mm}
+
+% -----------------------------------------------------------------------------
+
+\textbf{\textcolor[rgb]{0.00,0.00,1.00}{\emph{The authors would like
+to thank the editor and the reviewers for having spent precious time
+to review the paper and giving valuable comments. We have carefully
+considered all of your comments and have made necessary
+modifications in our revised manuscript. We believe that the quality
+of the paper has been improved, thank you for your effort and
+contribution. The reviewers' comments and our respective responses
+are listed below.}}}
+
+% -----------------------------------------------------------------------------
+%\begin{comment}
+\vspace{5mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{EDITOR}}
+
+\vspace{3mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+The major concern is that it's not well justified why Blockchain is the right technology for the proposed dynamic spectrum acquisition given the slow speed of PoW, small number of MVNOs, and potential security vulnerabilities. Furthermore, the proposed method is not compared with conventional ones. So its advantage is not clearly demonstrated.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the editor for the valuable comments.  From the $ 5^{th} $ to the $ 9^{th} $ paragraph in Section I, from the $ 2^{nd} $ to the $ 8^{th} $ sentence of the $ 1^{st} $ paragraph in Section II and from the $ 3^{rd} $ sentence to the end of the $ 1^{st} $ paragraph in Section VII  in the revised manuscript, we have properly addressed the editor's comments.
+\newpage
+%\end{comment}
+
+
+\vspace{5mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{REVIEWER
+1}}
+
+\vspace{3mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+The paper by Jiang et al. provides a report on usage of a decentralized blockchain based dynamic spectrum method. The authors aims to minimize the sum transmit power at all multiple mobile virtual network operators while satisfying the average data transmission rate thresholds. I believe the two key results are as follows: 1. The authors theoretically derive the semi-closed-form solution to the actual required sum transmit power minimization problem subject to data transmission rate constraints. 2. The authors' scheme achieves almost the same minimum sum power as the non-causal scheme which assumes the number of active MUs in all cells and all the channels are known non-causally for the optimal dynamic spectrum allocation.
+
+The paper is timely, well written, and of interest to readers in a variety of disciplines. I recommend publication of the manuscript provided the authors can address the following comments. Some of the comments are major issues regarding the set up and practicality of the proposed methods.
+ 
+1. The authors suggest using blockchain for their data computation. In general blockchain is a distributed data base and it is not used for that purpose. They need to justify their proposal. They provided a mathematical derivation for the feasibility of the blockchain usage but not for it's purpose. Also blockchain is computationally expensive. They are also really power demanding. Authors need to address these issues for their scheme when they want to compare it to the current methods. This may change their findings completely.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. From the $ 5^{th} $ to the $ 9^{th} $ paragraph in Section I and from the $ 2^{nd} $ to the $ 8^{th} $ sentence of the $ 1^{st} $ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+2. In the system model, authors mentioned the MVNOs should predict the required spectrum to provide. This is in general a hard problem. There are many papers addressing this topic and many start up companies started their business based on this. This needs to be addressed. It is not also clear the suggestion of Poisson point process is for spectrum availability or demand and what is the motivation for this.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $ 3^{rd} $ paragraph of Section II in the revised manuscript, we have properly addressed the reviewer's comments.
+
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+3. I suggest the authors compare the findings in figure 1 clearly. Why the performance is so different for different numbers of MVNO. The explanation is not clear and comprehensive.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{3mm}
+
+We thank the editor for the valuable comments. From the $ 2^{nd} $ to the last sentence of the $ 2^{nd} $ paragraph in Section VI in the revised manuscript, we have properly addressed the reviewer's comments. To compare the findings more clearly, we also include a new table, Table 1, in the revised manuscript.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+4. The authors need to show the simulation setup used for figure 3 and 4 clearly so the results can be produced for reader to compare their method. Some terms are not explained clearly for their comparison.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{3mm}
+
+We thank the editor for the valuable comments. In the $ 1^{st} $ sentence of the $ 4^{th} $ and $ 5^{th} $ paragraph in Section VI in the revised manuscript, we have properly addressed the reviewer's comments. 
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+5. The authors have used blockchain for their method; but they did not measure the performance compared to other conventional methods.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{3mm}
+
+We thank the editor for the valuable comments. From the $ 3^{rd} $ sentence to the end of the $ 1^{st} $ paragraph in Section VII, we have properly addressed the reviewer's comments.
+
+\newpage
+
+\vspace{5mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{REVIEWER 2}}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+This paper presents a decentralized blockchain based dynamic spectrum acquisition scheme for a wireless downlink communication system with multiple MVNOs. The proposed scheme aims to minimize the total power consumption of all MVNOs while meets the average transmission rate. The theoretical analysis is solid. However, my major concern of this work is the necessity of blockchain. 
+
+1. The authors mentioned there will be issue if the central node is under attack. I agreed with that. However, the blockchain won't solve the problem in the MVNOs scenario. One basic rule of PoW kind of blockchain is no one should control over $ 50\% $ computation power (a.k.a. $ 51\% $ attack). Large number of non-collusion miners could prevent such attack at a high possibility. However, it seems the number of MVNOs cannot meet such requirement, which would make it vulnerable for the $ 51\% $ attack.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. From the $ 6^{th} $ to the $ 9^{th} $ paragraph in Section I and from the $ 2^{nd} $ to the $ 8^{th} $ sentence of the $ 1^{st} $ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+2. The small number of MVNOs could lead another problem. Fake information (such as $z_m$, $u_m$) could be easily injected into blockchain by malicious MVNO. Since the result of next iteration is built on the previous iteration and the information from the peers, the fake information could easily expand over whole network and make the ultimate result incorrect.
+
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $ 5^{th} $ paragraph in Section I and the $ 3^{rd} $ sentence of the  $ 3^{rd} $ paragraph from the bottom in Section IV in the revised manuscript, we have properly addressed the reviewer's comments.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+3. Another issue is that the transaction finality of PoW kind of blockchain is slow, which means it is not a good candidate for real-time application (such as MVNOs).
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. From the $ 6^{th} $ to the $ 9^{th} $ paragraph in Section I and from the $ 2^{nd} $ to the $ 8^{th} $ sentence of the $ 1^{st} $ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+
+4. It seems the manuscripts not well prepared, such as the inconsistency of notation ``j-th MU in the i-th" against ``n-th MU in the m-th". 
+
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the revised manuscript, we have checked carefully and corrected the above and other typos.
+
+\newpage
+\vspace{5mm} \noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{REVIEWER
+3}}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+The paper proposes a Blockchain based dynamic spectrum acquisition scheme for the wireless downlink communcation, which aims to minimize the sum transmit power at all MVNOs while satisfying the average data transmission rate thresholds.
+
+There are several issues left unclear or undiscovered. My main concerns are as follows:
+
+1) The author mentioned the network visualization involves MNOs and MVNOs. The detailed discussion of spectrum leasing process is needed for the purpose of better understanding.
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. In the $ 3^{rd} $ paragraph from the bottom and the $ 2^{nd} $ paragraph from the bottom in Section IV in the revised manuscript, we have properly addressed the reviewer's comments.
+
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+2) ADMM is introduced in this work to obtain the global optimal
+solution to aforementioned optimization problem. An essential assumption author made in the manuscript is that variable z and u can be updated or acquired from the blockchain. I noticed that this is the only place involves the blockchain technology. 
+\begin{enumerate}[(a)]
+	\item What the system scheme of blockchain based dynamic spectrum acquisition looks like?
+	\item Is that server-based or mobile device-based? 
+	\item What is the issue existed in blockchain platform while implementing the proposed scheme?
+\end{enumerate}
+ 
+
+
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. 
+ \begin{enumerate}[(a)]
+	\item In the $ 3^{rd} $ paragraph from the bottom and the $ 2^{nd} $ paragraph from the bottom in Section IV in the revised manuscript, we have properly addressed the reviewer's comments.
+	
+	\item The blockchain system runs on the MVNOs which is server-based. From the $ 2^{nd} $ to the $ 8^{th} $ sentence of the $ 1^{st} $ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments.
+	
+	\item  In the $ 4^{th} $ sentence of the $ 1^{st} $ paragraph in Section IV in the revised manuscript, we have properly addressed the reviewer's comments.
+\end{enumerate}
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+
+3) Most importantly, in the process of running the ADMM based optimization algorithm, the variables z and u are supposed to be updated and acquired instantly on blockchain. I believe the speed of optimization algorithm will be slowed down due to the high mining complexity and consensus overhead. Author needs to justify feasibility of proposed scheme in this aspect.  
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. From the $ 6^{th} $ to the $ 9^{th} $ paragraph in Section I and from the $ 2^{nd} $ to the $ 8^{th} $ sentence of the $ 1^{st} $ paragraph in Section II in the revised manuscript, we have properly addressed the reviewer's comments.
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+4) The spectrum acquisition is performed several minutes? Is this a reasonable assumption for the lantency-aware dynamic spectrum acquisition system?
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comments. From the $ 2^{nd} $ to the $ 5^{th} $ sentence of the $ 1^{st} $ paragraph in Section II, we have properly addressed the reviewer's comments.
+
+
+\vspace{3mm}
+\noindent\textcolor[rgb]{1.00,0.00,0.00}{\textbf{Comment}}
+\vspace{3mm}
+
+5) Author needs to fix the typos like ``smart phone" and change the word in ``actual required minimum sum transmit power" into "actually required minimum sum transmit power".
+
+
+\vspace{3mm} \noindent\textcolor[rgb]{0.00,0.00,1.00}{\textbf{Response}}
+\vspace{2mm}
+
+We thank the reviewer for the valuable comment. In the revised manuscript, we have checked carefully and corrected the above and other typos. 
+
+ 
+	
+\end{document}
